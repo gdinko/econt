@@ -43,5 +43,10 @@ jobs:
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
+      - name: List
+        run: |
+          pwd
+          la -la
+
       - name: Execute tests
         run: ./vendor/bin/pest
