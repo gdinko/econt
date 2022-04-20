@@ -46,7 +46,7 @@ jobs:
       - name: List
         run: |
           pwd
-          la -la
+          ls-la
 
       - name: Execute tests
         run: ./vendor/bin/pest
