@@ -39,7 +39,7 @@ class Econt
     {
         return [
             'user' => $this->user,
-            'pass' => $this->pass
+            'pass' => $this->pass,
         ];
     }
 
@@ -85,7 +85,7 @@ class Econt
     {
         return Http::timeout($this->timeout)
             ->post("{$this->endpoint}/Nomenclatures/NomenclaturesService.getCities.json", [
-                'countryCode' => $countryCode
+                'countryCode' => $countryCode,
             ])
             ->json('cities');
     }

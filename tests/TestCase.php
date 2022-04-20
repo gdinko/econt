@@ -2,9 +2,9 @@
 
 namespace Gdinko\Econt\Tests;
 
+use Gdinko\Econt\EcontServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Gdinko\Econt\EcontServiceProvider;
 
 class TestCase extends Orchestra
 {
