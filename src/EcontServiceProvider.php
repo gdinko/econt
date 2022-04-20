@@ -54,7 +54,7 @@ class EcontServiceProvider extends ServiceProvider
 
         // Register the main class to use with the facade
         $this->app->singleton('econt', function () {
-            return new Econt;
+            return new Econt();
         });
     }
 }
