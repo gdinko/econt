@@ -2,7 +2,7 @@
 
 namespace Gdinko\Econt\Traits;
 
-trait MakesEndpoints
+trait Endpoints
 {
     public function getCountriesEndpoint()
     {
@@ -27,5 +27,15 @@ trait MakesEndpoints
     public function getQuartersEndpoint()
     {
         return $this->endpoint . '/Nomenclatures/NomenclaturesService.getQuarters.json';
+    }
+
+    public function getValidateAddressEndpoint()
+    {
+        return $this->endpoint . '/Nomenclatures/AddressService.validateAddress.json';
+    }
+
+    public function getNearestOfficesEndpoint()
+    {
+        return $this->endpoint . '/Nomenclatures/AddressService.getNearestOffices.json';
     }
 }
