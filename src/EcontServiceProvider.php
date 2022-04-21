@@ -11,7 +11,6 @@ class EcontServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config/econt.php' => config_path('econt.php'),

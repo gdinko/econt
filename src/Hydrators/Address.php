@@ -38,7 +38,7 @@ class Address
         }
 
         return [
-            'address' => $validator->validated()
+            'address' => $validator->validated(),
         ];
     }
 }

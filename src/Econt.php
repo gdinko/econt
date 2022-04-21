@@ -2,14 +2,13 @@
 
 namespace Gdinko\Econt;
 
-use Illuminate\Support\Facades\Http;
-use Gdinko\Econt\Traits\Endpoints;
 use Gdinko\Econt\Exceptions\EcontException;
 use Gdinko\Econt\Hydrators\Address;
+use Gdinko\Econt\Traits\Endpoints;
+use Illuminate\Support\Facades\Http;
 
 class Econt
 {
-
     use Endpoints;
 
     /**
@@ -86,7 +85,6 @@ class Econt
         $response = Http::timeout($this->timeout)
             ->post($endpoint, $request)
             ->throw(function ($response, $e) {
-
                 $message = $e->getMessage();
                 $code = $e->getCode();
                 $type = null;
@@ -142,7 +140,7 @@ class Econt
      * getOffices
      *
      * @param  string $countryCode Three-letter ISO Alpha-3 code of the country (e.g. AUT, BGR, etc.)
-     * @param  integer $cityID
+     * @param  int $cityID
      * @return array
      */
     public function getOffices(string $countryCode = '', int $cityID = null): array
@@ -159,7 +157,7 @@ class Econt
     /**
      * getStreets
      *
-     * @param  integer $cityID
+     * @param  int $cityID
      * @return array
      */
     public function getStreets(int $cityID = null): array
@@ -173,7 +171,7 @@ class Econt
     /**
      * getQuarters
      *
-     * @param  integer $cityID
+     * @param  int $cityID
      * @return array
      */
     public function getQuarters(int $cityID = null): array

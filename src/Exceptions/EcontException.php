@@ -16,7 +16,7 @@ class EcontException extends Exception
      * __construct
      *
      * @param  string $message
-     * @param  integer $code
+     * @param  int $code
      * @param  string $type Econt Exception Type
      * @param  array $fields Econt Fields
      * @param  array $errors Econt Errors

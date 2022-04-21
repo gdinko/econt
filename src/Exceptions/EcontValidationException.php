@@ -12,7 +12,7 @@ class EcontValidationException extends Exception
      * __construct
      *
      * @param  string $message
-     * @param  integer $code
+     * @param  int $code
      * @param  array $errors Validation Errors
      * @return void
      */
@@ -22,7 +22,7 @@ class EcontValidationException extends Exception
 
         $this->errors = $errors;
     }
-    
+
     /**
      * getErrors
      *
