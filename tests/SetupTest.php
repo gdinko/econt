@@ -2,11 +2,6 @@
 
 use Gdinko\Econt\Econt;
 
-test('create default econt object', function () {
-    $econt = new Econt();
-    expect($econt)->toBeInstanceOf(Econt::class);
-});
-
 test('setup default econt object', function () {
     $econt = new Econt();
 
@@ -27,7 +22,7 @@ test('setup default econt object', function () {
     expect($econt->getTimeout())->toEqual(config('econt.timeout'));
 });
 
-test('setup props of econt object', function () {
+test('set props of econt object', function () {
     $econt = new Econt();
 
     expect($econt)->toBeInstanceOf(Econt::class);

@@ -2,17 +2,34 @@
 
 namespace Gdinko\Econt;
 
-use Illuminate\Support\Facades\Http;
+use Gdinko\Econt\Traits\MakesEndpoints;
+use Gdinko\Econt\Traits\NomenclaturesService;
 
 class Econt
 {
+
+    use MakesEndpoints, NomenclaturesService;
+
+    /**
+     * Econt API username
+     */
     private $user;
 
+    /**
+     * Econt API password
+     */
     private $pass;
 
+    /**
+     * Econt API endpoint
+     */
     private $endpoint;
 
+    /**
+     * Econt API Request timeout
+     */
     private $timeout;
+
 
     public function __construct()
     {
@@ -43,7 +60,7 @@ class Econt
         ];
     }
 
-    public function setEndpoint($endpoint)
+    public function setEndpoint(string $endpoint)
     {
         $this->endpoint = rtrim($endpoint, '/');
     }
@@ -53,7 +70,7 @@ class Econt
         return $this->endpoint;
     }
 
-    public function setTimeout($timeout)
+    public function setTimeout(int $timeout)
     {
         $this->timeout = $timeout;
     }
@@ -61,32 +78,5 @@ class Econt
     public function getTimeout()
     {
         return $this->timeout;
-    }
-
-    /**
-     * getCountries
-     *
-     * @return array
-     */
-    public function getCountries()
-    {
-        return Http::timeout($this->timeout)
-            ->get("{$this->endpoint}/Nomenclatures/NomenclaturesService.getCountries.json")
-            ->json('countries');
-    }
-
-    /**
-     * getCities
-     *
-     * @param string $countryCode // Three-letter ISO Alpha-3 code of the country (e.g. AUT, BGR, etc.)
-     * @return array
-     */
-    public function getCities($countryCode = '')
-    {
-        return Http::timeout($this->timeout)
-            ->post("{$this->endpoint}/Nomenclatures/NomenclaturesService.getCities.json", [
-                'countryCode' => $countryCode,
-            ])
-            ->json('cities');
     }
 }
