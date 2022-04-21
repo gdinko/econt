@@ -7,8 +7,8 @@ use Gdinko\Econt\Traits\NomenclaturesService;
 
 class Econt
 {
-
-    use MakesEndpoints, NomenclaturesService;
+    use MakesEndpoints;
+    use NomenclaturesService;
 
     /**
      * Econt API username
@@ -29,7 +29,6 @@ class Econt
      * Econt API Request timeout
      */
     private $timeout;
-
 
     public function __construct()
     {

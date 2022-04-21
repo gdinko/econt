@@ -37,7 +37,7 @@ trait NomenclaturesService
      * getOffices
      *
      * @param  string $countryCode Three-letter ISO Alpha-3 code of the country (e.g. AUT, BGR, etc.)
-     * @param  integer $cityID
+     * @param  int $cityID
      * @return array
      */
     public function getOffices(string $countryCode = '', int $cityID = null): array
@@ -53,7 +53,7 @@ trait NomenclaturesService
     /**
      * getStreets
      *
-     * @param  integer $cityID
+     * @param  int $cityID
      * @return array
      */
     public function getStreets(int $cityID = null): array
@@ -68,7 +68,7 @@ trait NomenclaturesService
     /**
      * getQuarters
      *
-     * @param  integer $cityID
+     * @param  int $cityID
      * @return array
      */
     public function getQuarters(int $cityID = null): array
