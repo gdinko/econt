@@ -48,7 +48,7 @@ jobs:
 
       - name: Views logs
         run: |
-          cd ./build/logs/
+          cd build/logs/
           ls -la 
 
       - name: Generate test coverage badge
