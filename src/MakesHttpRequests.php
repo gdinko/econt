@@ -3,6 +3,7 @@
 namespace Gdinko\Econt;
 
 use Gdinko\Econt\Exceptions\EcontException;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 
 trait MakesHttpRequests
@@ -24,7 +25,8 @@ trait MakesHttpRequests
 
     public function request($verb, $uri, $data = [])
     {
-        $response = Http::timeout($this->timeout)
+        $response = Http::withBasicAuth($this->user, $this->pass)
+            ->timeout($this->timeout)
             ->baseUrl($this->baseUri)
             ->{$verb}($uri, $data)
             ->throw(function ($response, $e) {
