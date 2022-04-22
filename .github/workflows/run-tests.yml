@@ -48,6 +48,8 @@ jobs:
 
       - name: Views logs
         run: |
+          pwd
+          ls -la
           cd build/logs/
           ls -la 
 
