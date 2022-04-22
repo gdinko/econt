@@ -50,7 +50,7 @@ jobs:
         run: |
           pwd
           ls -la
-          cd build/logs/
+          cd build
           ls -la 
 
       - name: Generate test coverage badge
