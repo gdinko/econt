@@ -3,7 +3,6 @@
 namespace Gdinko\Econt;
 
 use Gdinko\Econt\Exceptions\EcontException;
-use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 
 trait MakesHttpRequests

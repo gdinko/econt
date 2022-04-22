@@ -72,7 +72,6 @@ test('Can Get City List For Bulgaria', function () {
 });
 
 test('Can Get Office List For Bulgaria', function () {
-
     $result = Econt::getOffices('bgr');
 
     expect($result)
@@ -103,7 +102,6 @@ test('Can Get Office List For Bulgaria', function () {
 });
 
 test('Can Get Street List For City', function () {
-
     $result = Econt::getStreets(10);
 
     expect($result)
@@ -117,7 +115,6 @@ test('Can Get Street List For City', function () {
 });
 
 test('Can Get Quarters List For City', function () {
-
     $result = Econt::getQuarters(10);
 
     expect($result)
@@ -131,13 +128,12 @@ test('Can Get Quarters List For City', function () {
 });
 
 test('Validate Address Valid Address', function () {
-
     $address = new Address([
         'city' => [
-            'name' => 'София'
+            'name' => 'София',
         ],
         'street' => 'България',
-        'num' => '100'
+        'num' => '100',
     ]);
 
     $result = Econt::validateAddress($address);
@@ -150,10 +146,9 @@ test('Validate Address Valid Address', function () {
 });
 
 test('Validate Address Invalid Address', function () {
-
     $address = new Address([
         'city' => [
-            'name' => 'София'
+            'name' => 'София',
         ],
         'street' => 'България',
     ]);
@@ -162,13 +157,12 @@ test('Validate Address Invalid Address', function () {
 });
 
 test('Get Nearest offices to address', function () {
-
     $address = new Address([
         'city' => [
-            'name' => 'София'
+            'name' => 'София',
         ],
         'street' => 'България',
-        'num' => '100'
+        'num' => '100',
     ]);
 
     $result = Econt::getNearestOffices($address);
