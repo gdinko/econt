@@ -43,13 +43,8 @@ jobs:
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
-      - name: List
-        run: |
-          pwd
-          ls -la
-
       - name: Execute tests
-        run: ./vendor/bin/pest
+        run: ./vendor/bin/pest --coverage-clover clover.xml
 
       - name: Generate test coverage badge
         uses: timkrase/phpunit-coverage-badge@v1.2.0
