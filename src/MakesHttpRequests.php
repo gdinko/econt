@@ -2,12 +2,11 @@
 
 namespace Gdinko\Econt;
 
-use Illuminate\Support\Facades\Http;
 use Gdinko\Econt\Exceptions\EcontException;
+use Illuminate\Support\Facades\Http;
 
 trait MakesHttpRequests
 {
-
     public function get($uri)
     {
         return $this->request('get', $uri);

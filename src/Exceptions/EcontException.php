@@ -6,7 +6,6 @@ use Exception;
 
 class EcontException extends Exception
 {
-
     protected $errors;
 
     /**
@@ -23,7 +22,7 @@ class EcontException extends Exception
 
         $this->errors = $errors;
     }
-    
+
     /**
      * getErrors
      *

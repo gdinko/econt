@@ -13,12 +13,11 @@ test('Can Get Country list', function () {
             '0.code3',
             '0.name',
             '0.nameEn',
-            '0.isEU'
+            '0.isEU',
         ]);
 });
 
 test('Can Get City List', function () {
-
     Econt::setTimeout(50);
 
     $cities = Econt::getCities();
@@ -35,12 +34,11 @@ test('Can Get City List', function () {
             '0.regionNameEn',
             '0.phoneCode',
             '0.location',
-            '0.expressCityDeliveries'
+            '0.expressCityDeliveries',
         ]);
 });
 
 test('Can Get City List For Bulgaria', function () {
-
     Econt::setTimeout(50);
 
     $cities = Econt::getCities('bgr');
@@ -57,7 +55,7 @@ test('Can Get City List For Bulgaria', function () {
             '0.regionNameEn',
             '0.phoneCode',
             '0.location',
-            '0.expressCityDeliveries'
+            '0.expressCityDeliveries',
         ]);
 
     $numCities = count($cities);
