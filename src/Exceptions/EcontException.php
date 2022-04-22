@@ -6,59 +6,30 @@ use Exception;
 
 class EcontException extends Exception
 {
-    protected $type = null;
 
-    protected $fields = [];
-
-    protected $errors = [];
+    protected $errors;
 
     /**
      * __construct
      *
      * @param  string $message
      * @param  int $code
-     * @param  string $type Econt Exception Type
-     * @param  array $fields Econt Fields
      * @param  array $errors Econt Errors
      * @return void
      */
-    public function __construct($message, $code = 0, $type = null, $fields = [], $errors = [])
+    public function __construct($message, $code = 0, $errors = null)
     {
         parent::__construct($message, $code);
 
-        $this->type = $type;
-
-        $this->fields = $fields;
-
         $this->errors = $errors;
     }
-
-    /**
-     * getType
-     *
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * getFields
-     *
-     * @return array
-     */
-    public function getFields(): array
-    {
-        return $this->fields;
-    }
-
+    
     /**
      * getErrors
      *
      * @return array
      */
-    public function getErrors(): array
+    public function getErrors(): ?array
     {
         return $this->errors;
     }

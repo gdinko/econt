@@ -2,34 +2,30 @@
 
 namespace Gdinko\Econt;
 
-use Gdinko\Econt\Exceptions\EcontException;
-use Gdinko\Econt\Hydrators\Address;
-use Gdinko\Econt\Traits\Endpoints;
-use Illuminate\Support\Facades\Http;
-
 class Econt
 {
-    use Endpoints;
+    use MakesHttpRequests,
+        Actions\ManagesNomenclatures;
 
     /**
      * Econt API username
      */
-    private $user;
+    protected $user;
 
     /**
      * Econt API password
      */
-    private $pass;
+    protected $pass;
 
     /**
-     * Econt API endpoint
+     * Econt API Base Uri
      */
-    private $endpoint;
+    protected $baseUri;
 
     /**
      * Econt API Request timeout
      */
-    private $timeout;
+    protected $timeout;
 
     public function __construct()
     {
@@ -37,13 +33,18 @@ class Econt
 
         $this->pass = config('econt.pass');
 
-        $this->endpoint = config('econt.production-endpoint');
+        $this->timeout = config('econt.timeout');
+
+        $this->configBaseUri();
+    }
+
+    public function configBaseUri()
+    {
+        $this->baseUri = config('econt.production-base-uri');
 
         if (config('econt.env') == 'test') {
-            $this->endpoint = config('econt.test-endpoint');
+            $this->baseUri = config('econt.test-base-uri');
         }
-
-        $this->timeout = config('econt.timeout');
     }
 
     public function setAccount($user, $pass)
@@ -60,14 +61,14 @@ class Econt
         ];
     }
 
-    public function setEndpoint(string $endpoint)
+    public function setBaseUri(string $baseUri)
     {
-        $this->endpoint = rtrim($endpoint, '/');
+        $this->baseUri = rtrim($baseUri, '/');
     }
 
-    public function getEndpoint()
+    public function getBaseUri()
     {
-        return $this->endpoint;
+        return $this->baseUri;
     }
 
     public function setTimeout(int $timeout)
@@ -78,120 +79,5 @@ class Econt
     public function getTimeout()
     {
         return $this->timeout;
-    }
-
-    public function request($endpoint, $request = [])
-    {
-        $response = Http::timeout($this->timeout)
-            ->post($endpoint, $request)
-            ->throw(function ($response, $e) {
-                $message = $e->getMessage();
-                $code = $e->getCode();
-                $type = null;
-                $fields = [];
-                $errors = [];
-
-                if ($response->json()) {
-                    $message = $response->json()['type'] ?? $e->getMessage();
-                    $type = $response->json()['type'] ?? null;
-                    $fields = $response->json()['fields'] ?? null;
-                    $errors = $response->json()['innerErrors'] ?? null;
-                }
-
-                throw new EcontException(
-                    $message,
-                    $code,
-                    $type,
-                    $fields,
-                    $errors
-                );
-            });
-
-        return $response->json();
-    }
-
-    /**
-     * getCountries
-     *
-     * @return array
-     */
-    public function getCountries(): array
-    {
-        return $this->request(
-            $this->getCountriesEndpoint()
-        )['countries'];
-    }
-
-    /**
-     * getCities
-     *
-     * @param string $countryCode Three-letter ISO Alpha-3 code of the country (e.g. AUT, BGR, etc.)
-     * @return array
-     */
-    public function getCities(string $countryCode = ''): array
-    {
-        return $this->request(
-            $this->getCitiesEndpoint(),
-            ['countryCode' => $countryCode]
-        )['cities'];
-    }
-
-    /**
-     * getOffices
-     *
-     * @param  string $countryCode Three-letter ISO Alpha-3 code of the country (e.g. AUT, BGR, etc.)
-     * @param  int $cityID
-     * @return array
-     */
-    public function getOffices(string $countryCode = '', int $cityID = null): array
-    {
-        return $this->request(
-            $this->getOfficesEndpoint(),
-            [
-                'countryCode' => $countryCode,
-                'cityID' => $cityID,
-            ]
-        )['offices'];
-    }
-
-    /**
-     * getStreets
-     *
-     * @param  int $cityID
-     * @return array
-     */
-    public function getStreets(int $cityID = null): array
-    {
-        return $this->request(
-            $this->getStreetsEndpoint(),
-            ['cityID' => $cityID]
-        )['streets'];
-    }
-
-    /**
-     * getQuarters
-     *
-     * @param  int $cityID
-     * @return array
-     */
-    public function getQuarters(int $cityID = null): array
-    {
-        return $this->request(
-            $this->getQuartersEndpoint(),
-            ['cityID' => $cityID]
-        )['quarters'];
-    }
-
-    public function validateAddress(Address $address)
-    {
-        return $this->request(
-            $this->getValidateAddressEndpoint(),
-            $address->validated()
-        );
-    }
-
-    public function getNearestOffices()
-    {
-        return $this->request($this->getNearestOfficesEndpoint(), []);
     }
 }

@@ -9,7 +9,7 @@ class Address
 {
     protected $address = [];
 
-    public function __construct($address)
+    public function __construct(array $address)
     {
         $this->address = $address;
     }
@@ -26,6 +26,9 @@ class Address
             'num' => 'string|nullable|required_without_all:fullAddress,quarter|required_with:street',
             'other' => 'string|nullable',
             'location' => 'array|nullable',
+            'location.latitude' => 'integer|sometimes|required_with:location.longitude',
+            'location.longitude' => 'integer|sometimes|required_with:location.latitude',
+            'location.confidence' => 'integer|sometimes',
             'zip' => 'string|nullable',
         ]);
 
