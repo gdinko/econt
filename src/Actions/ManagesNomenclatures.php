@@ -82,7 +82,7 @@ trait ManagesNomenclatures
      * validateAddress
      *
      * @param \Gdinko\Econt\Hydrators\Address $address
-     * @return void
+     * @return array
      */
     public function validateAddress(Address $address): array
     {
