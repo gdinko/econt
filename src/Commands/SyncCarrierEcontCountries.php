@@ -2,10 +2,10 @@
 
 namespace Gdinko\Econt\Commands;
 
-use Illuminate\Console\Command;
+use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontCountries;
-use Gdinko\Econt\Exceptions\EcontImportValidationException;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
 
 class SyncCarrierEcontCountries extends Command
@@ -44,7 +44,6 @@ class SyncCarrierEcontCountries extends Command
         $this->info('-> Carrier Econt Import Countries');
 
         try {
-
             Econt::setTimeout(
                 $this->option('timeout')
             );
@@ -78,11 +77,10 @@ class SyncCarrierEcontCountries extends Command
 
         $bar->start();
 
-        if (!empty($countries)) {
+        if (! empty($countries)) {
             CarrierEcontCountries::truncate();
 
             foreach ($countries as $country) {
-
                 $validated = $this->validator($country);
 
                 CarrierEcontCountries::create([

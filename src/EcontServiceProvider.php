@@ -2,10 +2,10 @@
 
 namespace Gdinko\Econt;
 
-use Illuminate\Support\ServiceProvider;
 use Gdinko\Econt\Commands\SyncCarrierEcontAll;
-use Gdinko\Econt\Commands\SyncCarrierEcontCountries;
 use Gdinko\Econt\Commands\SyncCarrierEcontCities;
+use Gdinko\Econt\Commands\SyncCarrierEcontCountries;
+use Illuminate\Support\ServiceProvider;
 
 class EcontServiceProvider extends ServiceProvider
 {

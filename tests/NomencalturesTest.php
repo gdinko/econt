@@ -1,9 +1,9 @@
 <?php
 
+use Gdinko\Econt\Exceptions\EcontException;
 use Gdinko\Econt\Exceptions\EcontValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Hydrators\Address;
-use Gdinko\Econt\Exceptions\EcontException;
 
 test('Can Get Country list', function () {
     $result = Econt::getCountries();

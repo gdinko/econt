@@ -38,11 +38,11 @@ class SyncCarrierEcontAll extends Command
     public function handle()
     {
         $this->call('sync:carrier-econt-countries', [
-            '--timeout' => $this->option('timeout')
+            '--timeout' => $this->option('timeout'),
         ]);
 
         $this->call('sync:carrier-econt-cities', [
-            '--timeout' => $this->option('timeout')
+            '--timeout' => $this->option('timeout'),
         ]);
 
         return 0;

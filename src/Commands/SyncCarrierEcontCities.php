@@ -2,10 +2,10 @@
 
 namespace Gdinko\Econt\Commands;
 
-use Illuminate\Console\Command;
+use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontCities;
-use Gdinko\Econt\Exceptions\EcontImportValidationException;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
 
 class SyncCarrierEcontCities extends Command
@@ -44,7 +44,6 @@ class SyncCarrierEcontCities extends Command
         $this->info('-> Carrier Econt Import Cities');
 
         try {
-
             Econt::setTimeout(
                 $this->option('timeout')
             );
@@ -78,11 +77,10 @@ class SyncCarrierEcontCities extends Command
 
         $bar->start();
 
-        if (!empty($cities)) {
+        if (! empty($cities)) {
             CarrierEcontCities::truncate();
 
             foreach ($cities as $city) {
-
                 $validated = $this->validator($city);
 
                 CarrierEcontCities::create([
