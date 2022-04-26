@@ -3,6 +3,7 @@
 use Gdinko\Econt\Exceptions\EcontValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Hydrators\Address;
+use Gdinko\Econt\Exceptions\EcontException;
 
 test('Can Get Country list', function () {
     $result = Econt::getCountries();
@@ -154,6 +155,18 @@ test('Validate Address Invalid Address', function () {
     ]);
 
     expect(fn () => Econt::validateAddress($address))->toThrow(EcontValidationException::class);
+});
+
+test('Validate Address Valid Address Not Valida Data', function () {
+    $address = new Address([
+        'city' => [
+            'name' => 'Никарагуа',
+        ],
+        'street' => 'България',
+        'num' => '100',
+    ]);
+
+    expect(fn () => Econt::validateAddress($address))->toThrow(EcontException::class);
 });
 
 test('Get Nearest offices to address', function () {

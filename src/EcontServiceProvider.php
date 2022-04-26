@@ -3,6 +3,9 @@
 namespace Gdinko\Econt;
 
 use Illuminate\Support\ServiceProvider;
+use Gdinko\Econt\Commands\SyncCarrierEcontAll;
+use Gdinko\Econt\Commands\SyncCarrierEcontCountries;
+use Gdinko\Econt\Commands\SyncCarrierEcontCities;
 
 class EcontServiceProvider extends ServiceProvider
 {
@@ -11,10 +14,19 @@ class EcontServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config/econt.php' => config_path('econt.php'),
             ], 'config');
+
+            // Registering package commands.
+            $this->commands([
+                SyncCarrierEcontAll::class,
+                SyncCarrierEcontCountries::class,
+                SyncCarrierEcontCities::class,
+            ]);
         }
     }
 
