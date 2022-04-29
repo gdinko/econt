@@ -2,11 +2,11 @@
 
 namespace Gdinko\Econt\Commands;
 
-use Illuminate\Console\Command;
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
-use Illuminate\Support\Facades\Validator;
 use Gdinko\Econt\Models\CarrierEcontStreet;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Validator;
 
 class SyncCarrierEcontStreets extends Command
 {
@@ -77,7 +77,7 @@ class SyncCarrierEcontStreets extends Command
 
         $bar->start();
 
-        if (!empty($cities)) {
+        if (! empty($cities)) {
             CarrierEcontStreet::truncate();
 
             foreach ($cities as $city) {
