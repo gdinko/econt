@@ -16,7 +16,7 @@ class CreateCarrierEcontOfficesTable extends Migration
         Schema::create('carrier_econt_offices', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('econt_id');
+            $table->integer('econt_office_id')->index();
             $table->string('code')->index();
             $table->string('country_code3')->index();
             $table->string('econt_city_id')->index();

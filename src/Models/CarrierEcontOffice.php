@@ -5,17 +5,12 @@ namespace Gdinko\Econt\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CarrierEcontOffices extends Model
+class CarrierEcontOffice extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'econt_id',
+        'econt_office_id',
         'code',
         'country_code3',
         'econt_city_id',
@@ -41,11 +36,6 @@ class CarrierEcontOffices extends Model
         'meta',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
     protected $casts = [
         'phones' => 'array',
         'emails' => 'array',
@@ -53,4 +43,13 @@ class CarrierEcontOffices extends Model
         'shipment_types' => 'array',
         'meta' => 'array',
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(
+            CarrierEcontCity::class,
+            'econt_city_id',
+            'econt_city_id'
+        );
+    }
 }

@@ -4,7 +4,7 @@ namespace Gdinko\Econt\Commands;
 
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
-use Gdinko\Econt\Models\CarrierEcontOffices;
+use Gdinko\Econt\Models\CarrierEcontOffice;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -79,13 +79,13 @@ class SyncCarrierEcontOffices extends Command
         $bar->start();
 
         if (! empty($offices)) {
-            CarrierEcontOffices::truncate();
+            CarrierEcontOffice::truncate();
 
             foreach ($offices as $office) {
                 $validated = $this->validator($office);
 
-                CarrierEcontOffices::create([
-                    'econt_id' => $validated['id'],
+                CarrierEcontOffice::create([
+                    'econt_office_id' => $validated['id'],
                     'code' => $validated['code'],
                     'country_code3' => $validated['address']['city']['country']['code3'],
                     'econt_city_id' => $validated['address']['city']['id'],

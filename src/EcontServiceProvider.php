@@ -6,6 +6,8 @@ use Gdinko\Econt\Commands\SyncCarrierEcontAll;
 use Gdinko\Econt\Commands\SyncCarrierEcontCities;
 use Gdinko\Econt\Commands\SyncCarrierEcontCountries;
 use Gdinko\Econt\Commands\SyncCarrierEcontOffices;
+use Gdinko\Econt\Commands\SyncCarrierEcontStreets;
+use Gdinko\Econt\Commands\SyncCarrierEcontQuarters;
 use Illuminate\Support\ServiceProvider;
 
 class EcontServiceProvider extends ServiceProvider
@@ -28,6 +30,8 @@ class EcontServiceProvider extends ServiceProvider
                 SyncCarrierEcontCountries::class,
                 SyncCarrierEcontCities::class,
                 SyncCarrierEcontOffices::class,
+                SyncCarrierEcontStreets::class,
+                SyncCarrierEcontQuarters::class,
             ]);
         }
     }

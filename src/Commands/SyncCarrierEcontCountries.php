@@ -4,7 +4,7 @@ namespace Gdinko\Econt\Commands;
 
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
-use Gdinko\Econt\Models\CarrierEcontCountries;
+use Gdinko\Econt\Models\CarrierEcontCountry;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
 
@@ -77,14 +77,14 @@ class SyncCarrierEcontCountries extends Command
 
         $bar->start();
 
-        if (! empty($countries)) {
-            CarrierEcontCountries::truncate();
+        if (!empty($countries)) {
+            CarrierEcontCountry::truncate();
 
             foreach ($countries as $country) {
                 $validated = $this->validator($country);
 
-                CarrierEcontCountries::create([
-                    'econt_id' => $validated['id'],
+                CarrierEcontCountry::create([
+                    'econt_country_id' => $validated['id'],
                     'code2' => $validated['code2'],
                     'code3' => $validated['code3'],
                     'name' => $validated['name'],

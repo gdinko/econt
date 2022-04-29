@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCarrierEcontCountriesTable extends Migration
+class CreateCarrierEcontQuartersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateCarrierEcontCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('carrier_econt_countries', function (Blueprint $table) {
+        Schema::create('carrier_econt_quarters', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('econt_country_id')->nullable();
-            $table->char('code2', 2)->nullable();
-            $table->char('code3', 3)->index();
-            $table->string('name')->index();
+            $table->integer('econt_quarter_id')->index();
+            $table->integer('econt_city_id')->index();
+            $table->string('name');
             $table->string('name_en')->nullable();
-            $table->tinyInteger('is_eu')->nullable()->default(0);
-
+            
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ class CreateCarrierEcontCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carrier_econt_countries');
+        Schema::dropIfExists('carrier_econt_quarters');
     }
 }

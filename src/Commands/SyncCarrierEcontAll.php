@@ -45,6 +45,18 @@ class SyncCarrierEcontAll extends Command
             '--timeout' => $this->option('timeout'),
         ]);
 
+        $this->call('sync:carrier-econt-offices', [
+            '--timeout' => $this->option('timeout'),
+        ]);
+
+        $this->call('sync:carrier-econt-streets', [
+            '--timeout' => $this->option('timeout'),
+        ]);
+
+        $this->call('sync:carrier-econt-quarters', [
+            '--timeout' => $this->option('timeout'),
+        ]);
+
         return 0;
     }
 }

@@ -16,7 +16,7 @@ class CreateCarrierEcontCitiesTable extends Migration
         Schema::create('carrier_econt_cities', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('econt_id')->nullable();
+            $table->integer('econt_city_id')->nullable();
             $table->char('country_code3', 3)->nullable()->index();
             $table->string('post_code')->nullable()->index();
             $table->string('name')->nullable();
