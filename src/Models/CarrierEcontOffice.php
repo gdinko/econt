@@ -5,6 +5,69 @@ namespace Gdinko\Econt\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Gdinko\Econt\Models\CarrierEcontOffice
+ *
+ * @property int $id
+ * @property int $econt_office_id
+ * @property string $code
+ * @property string $country_code3
+ * @property string $econt_city_id
+ * @property int|null $is_mps
+ * @property int|null $is_aps
+ * @property string $name
+ * @property string|null $name_en
+ * @property array|null $phones
+ * @property array|null $emails
+ * @property array|null $address
+ * @property string|null $info
+ * @property string|null $currency
+ * @property string|null $language
+ * @property string|null $normal_business_hours_from
+ * @property string|null $normal_business_hours_to
+ * @property string|null $half_day_business_hours_from
+ * @property string|null $half_day_business_hours_to
+ * @property array|null $shipment_types
+ * @property string|null $partner_code
+ * @property string|null $hub_code
+ * @property string|null $hub_name
+ * @property string|null $hub_name_en
+ * @property array|null $meta
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Gdinko\Econt\Models\CarrierEcontCity|null $city
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereCountryCode3($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereEcontCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereEcontOfficeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereEmails($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereHalfDayBusinessHoursFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereHalfDayBusinessHoursTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereHubCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereHubName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereHubNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereIsAps($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereIsMps($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereLanguage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereMeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereNormalBusinessHoursFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereNormalBusinessHoursTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice wherePartnerCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice wherePhones($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereShipmentTypes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class CarrierEcontOffice extends Model
 {
     use HasFactory;
