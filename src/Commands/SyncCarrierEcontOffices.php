@@ -78,7 +78,7 @@ class SyncCarrierEcontOffices extends Command
 
         $bar->start();
 
-        if (! empty($offices)) {
+        if (!empty($offices)) {
             CarrierEcontOffice::truncate();
 
             foreach ($offices as $office) {
