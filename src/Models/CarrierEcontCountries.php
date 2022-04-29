@@ -14,5 +14,12 @@ class CarrierEcontCountries extends Model
      *
      * @var array
      */
-    protected $fillable = ['*'];
+    protected $fillable = [
+        'econt_id',
+        'code2',
+        'code3',
+        'name',
+        'name_en',
+        'is_eu',
+    ];
 }

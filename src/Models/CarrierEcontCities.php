@@ -14,7 +14,19 @@ class CarrierEcontCities extends Model
      *
      * @var array
      */
-    protected $fillable = ['*'];
+    protected $fillable = [
+        'econt_id',
+        'country_code3',
+        'post_code',
+        'name',
+        'name_en',
+        'region_name',
+        'region_name_en',
+        'phone_code',
+        'location',
+        'express_city_deliveries',
+        'meta',
+    ];
 
     /**
      * The attributes that should be cast.

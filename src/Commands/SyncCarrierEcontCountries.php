@@ -77,7 +77,7 @@ class SyncCarrierEcontCountries extends Command
 
         $bar->start();
 
-        if (! empty($countries)) {
+        if (!empty($countries)) {
             CarrierEcontCountries::truncate();
 
             foreach ($countries as $country) {
