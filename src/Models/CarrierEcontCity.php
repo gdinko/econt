@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CarrierEcontCity extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'econt_city_id',
         'country_code3',
