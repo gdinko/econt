@@ -1,13 +1,12 @@
 <?php
 
+use Gdinko\Econt\Enums\LabelMode;
+use Gdinko\Econt\Enums\ShipmentType;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Hydrators\Label;
 use Gdinko\Econt\Hydrators\Labels;
-use Gdinko\Econt\Enums\LabelMode;
-use Gdinko\Econt\Enums\ShipmentType;
 
 it('Can Calculate Price', function () {
-
     $labelData = [
         'senderClient' => [
             'name' => 'Иван Иванов',
@@ -67,7 +66,6 @@ it('Can Calculate Price', function () {
 });
 
 it('Can Calculate Prices', function () {
-
     $labelsData = [
         [
             'senderClient' => [
@@ -109,7 +107,7 @@ it('Can Calculate Prices', function () {
             ],
             'payAfterAccept' => false,
             'payAfterTest' => false,
-        ]
+        ],
     ];
 
     $labels = new Labels(
@@ -129,7 +127,6 @@ it('Can Calculate Prices', function () {
 });
 
 it('Can Create Label', function () {
-
     $labelData = [
         'senderClient' => [
             'name' => 'Иван Иванов',
@@ -192,7 +189,6 @@ it('Can Create Label', function () {
 });
 
 it('Can Update Label', function () {
-
     $labelData = [
         'senderClient' => [
             'name' => 'Иван Иванов',
@@ -272,7 +268,6 @@ it('Can Update Label', function () {
 });
 
 it('Can Delete Label', function () {
-
     $labelData = [
         'senderClient' => [
             'name' => 'Иван Иванов',
@@ -334,7 +329,7 @@ it('Can Delete Label', function () {
     $this->assertNotEmpty($result['label']['shipmentNumber']);
 
     $resultDelete = Econt::deleteLabels([
-        $result['label']['shipmentNumber']
+        $result['label']['shipmentNumber'],
     ]);
 
     $this->assertNull($resultDelete[0]['error']);
@@ -346,7 +341,6 @@ it('Can Delete Label', function () {
 });
 
 it('Can Check Shipment Status', function () {
-
     $labelData = [
         'senderClient' => [
             'name' => 'Иван Иванов',
@@ -408,7 +402,7 @@ it('Can Check Shipment Status', function () {
     $this->assertNotEmpty($result['label']['shipmentNumber']);
 
     $resultStatus = Econt::getShipmentStatuses([
-        $result['label']['shipmentNumber']
+        $result['label']['shipmentNumber'],
     ]);
 
     $this->assertNull($resultStatus[0]['error']);
