@@ -7,10 +7,12 @@ use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontOffice;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Validator;
+use Gdinko\Econt\Traits\ValidatesImport;
 
 class SyncCarrierEcontOffices extends Command
 {
+    use ValidatesImport;
+
     /**
      * The name and signature of the console command.
      *
@@ -69,7 +71,12 @@ class SyncCarrierEcontOffices extends Command
 
         return 0;
     }
-
+    
+    /**
+     * import
+     *
+     * @return void
+     */
     protected function import()
     {
         $offices = Econt::getOffices();
@@ -78,11 +85,11 @@ class SyncCarrierEcontOffices extends Command
 
         $bar->start();
 
-        if (! empty($offices)) {
+        if (!empty($offices)) {
             CarrierEcontOffice::truncate();
 
             foreach ($offices as $office) {
-                $validated = $this->validator($office);
+                $validated = $this->validated($office);
 
                 CarrierEcontOffice::create([
                     'econt_office_id' => $validated['id'],
@@ -133,9 +140,14 @@ class SyncCarrierEcontOffices extends Command
         $bar->finish();
     }
 
-    protected function validator(array $data)
+    /**
+     * validationRules
+     *
+     * @return array
+     */
+    protected function validationRules(): array
     {
-        $validator = Validator::make($data, [
+        return [
             'id' => 'integer|required',
             'code' => 'string|required',
             'isMPS' => 'boolean|nullable',
@@ -160,16 +172,6 @@ class SyncCarrierEcontOffices extends Command
             'hubName' => 'string|nullable',
             'hubNameEn' => 'string|nullable',
 
-        ]);
-
-        if ($validator->fails()) {
-            throw new EcontImportValidationException(
-                __CLASS__,
-                422,
-                $validator->messages()->toArray()
-            );
-        }
-
-        return $validator->validated();
+        ];
     }
 }

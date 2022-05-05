@@ -7,9 +7,12 @@ use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontStreet;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
+use Gdinko\Econt\Traits\ValidatesImport;
 
 class SyncCarrierEcontStreets extends Command
 {
+    use ValidatesImport;
+    
     /**
      * The name and signature of the console command.
      *
@@ -68,7 +71,12 @@ class SyncCarrierEcontStreets extends Command
 
         return 0;
     }
-
+    
+    /**
+     * import
+     *
+     * @return void
+     */
     protected function import()
     {
         $cities = Econt::getStreets();
@@ -77,11 +85,11 @@ class SyncCarrierEcontStreets extends Command
 
         $bar->start();
 
-        if (! empty($cities)) {
+        if (!empty($cities)) {
             CarrierEcontStreet::truncate();
 
             foreach ($cities as $city) {
-                $validated = $this->validator($city);
+                $validated = $this->validated($city);
 
                 CarrierEcontStreet::create([
                     'econt_street_id' => $validated['id'],
@@ -97,23 +105,18 @@ class SyncCarrierEcontStreets extends Command
         $bar->finish();
     }
 
-    protected function validator(array $data)
+    /**
+     * validationRules
+     *
+     * @return array
+     */
+    protected function validationRules(): array
     {
-        $validator = Validator::make($data, [
+        return [
             'id' => 'integer|nullable',
             'cityID' => 'integer|required',
             'name' => 'string|required',
             'nameEn' => 'string|nullable',
-        ]);
-
-        if ($validator->fails()) {
-            throw new EcontImportValidationException(
-                __CLASS__,
-                422,
-                $validator->messages()->toArray()
-            );
-        }
-
-        return $validator->validated();
+        ];
     }
 }

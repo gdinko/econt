@@ -6,10 +6,12 @@ use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontCountry;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Validator;
+use Gdinko\Econt\Traits\ValidatesImport;
 
 class SyncCarrierEcontCountries extends Command
 {
+    use ValidatesImport;
+
     /**
      * The name and signature of the console command.
      *
@@ -68,7 +70,12 @@ class SyncCarrierEcontCountries extends Command
 
         return 0;
     }
-
+    
+    /**
+     * import
+     *
+     * @return void
+     */
     protected function import()
     {
         $countries = Econt::getCountries();
@@ -77,11 +84,11 @@ class SyncCarrierEcontCountries extends Command
 
         $bar->start();
 
-        if (! empty($countries)) {
+        if (!empty($countries)) {
             CarrierEcontCountry::truncate();
 
             foreach ($countries as $country) {
-                $validated = $this->validator($country);
+                $validated = $this->validated($country);
 
                 CarrierEcontCountry::create([
                     'econt_country_id' => $validated['id'],
@@ -99,25 +106,20 @@ class SyncCarrierEcontCountries extends Command
         $bar->finish();
     }
 
-    protected function validator(array $data)
+    /**
+     * validationRules
+     *
+     * @return array
+     */
+    protected function validationRules(): array
     {
-        $validator = Validator::make($data, [
+        return [
             'id' => 'integer|nullable',
             'code2' => 'string|nullable',
             'code3' => 'string|required',
             'name' => 'string|required',
             'nameEn' => 'string|nullable',
             'isEU' => 'boolean|nullable',
-        ]);
-
-        if ($validator->fails()) {
-            throw new EcontImportValidationException(
-                __CLASS__,
-                422,
-                $validator->messages()->toArray()
-            );
-        }
-
-        return $validator->validated();
+        ];
     }
 }

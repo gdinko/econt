@@ -9,6 +9,8 @@
 
 Laravel Econt API Wrapper
 
+[Econt JSON API Documentation](http://ee.econt.com/services/)
+
 ## Installation
 
 You can install the package via composer:
@@ -17,10 +19,41 @@ You can install the package via composer:
 composer require gdinko/econt
 ```
 
+## Configuration
+
+```bash
+ECONT_ENV=test|production #default=test
+ECONT_API_USER= #default=iasp-dev
+ECONT_API_PASS= #default=iasp-dev
+```
+
 ## Usage
 
+Get Countries
 ```php
-// Usage description here
+dd(Econt::getCountries());
+```
+
+Get Cities
+```php
+try {
+    dd(Econt::getCities('bgr'));
+} catch (EcontException $ee) {
+    echo $ee->getMessage();
+    print_r($ee->getErrors());
+    exit;
+}
+```
+
+Get Offices
+```php
+try {
+    dd(Econt::getOffices('bgr'));
+} catch (EcontException $ee) {
+    echo $ee->getMessage();
+    print_r($ee->getErrors());
+    exit;
+}
 ```
 
 ### Testing

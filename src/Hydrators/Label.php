@@ -20,8 +20,8 @@ class Label
      *
      * @param  array $label
      * @param  string $mode
-     * @param  DateTime $requestCourierTimeFrom
-     * @param  DateTime $requestCourierTimeTo
+     * @param  string $requestCourierTimeFrom
+     * @param  string $requestCourierTimeTo
      *
      * @return void
      */
@@ -45,7 +45,7 @@ class Label
      *
      * @return array
      */
-    public function validationRules(): array
+    protected function validationRules(): array
     {
         return [
             'shipmentNumber' => 'string|sometimes',
@@ -102,7 +102,7 @@ class Label
      *
      * @return array
      *
-     * @throws Exception
+     * @throws EcontValidationException
      */
     public function validated(): array
     {
@@ -113,7 +113,7 @@ class Label
 
         if ($validator->fails()) {
             throw new EcontValidationException(
-                Label::class,
+                __CLASS__,
                 422,
                 $validator->messages()->toArray()
             );

@@ -25,7 +25,7 @@ class Address
      *
      * @return array
      */
-    public function validationRules(): array
+    protected function validationRules(): array
     {
         return [
             'id' => 'integer|sometimes',
@@ -49,7 +49,7 @@ class Address
      *
      * @return array
      *
-     * @throws Exception
+     * @throws EcontValidationException
      */
     public function validated(): array
     {
@@ -60,7 +60,7 @@ class Address
 
         if ($validator->fails()) {
             throw new EcontValidationException(
-                Address::class,
+                __CLASS__,
                 422,
                 $validator->messages()->toArray()
             );

@@ -5,19 +5,20 @@ namespace Gdinko\Econt\Hydrators;
 use Gdinko\Econt\Exceptions\EcontValidationException;
 use Illuminate\Support\Facades\Validator;
 
-class Courier
+class Payment
 {
-    protected $courier = [];
+    protected $payment = [];
 
     /**
      * __construct
      *
-     * @param  array $courier
+     * @param  array $payment
+     *
      * @return void
      */
-    public function __construct(array $courier)
+    public function __construct(array $payment)
     {
-        $this->courier = $courier;
+        $this->payment = $payment;
     }
 
     /**
@@ -28,14 +29,8 @@ class Courier
     protected function validationRules(): array
     {
         return [
-            'requestTimeFrom' => 'date_format:Y-m-d H:i:s|after:now|required',
-            'requestTimeTo' => 'date_format:Y-m-d H:i:s|after:requestTimeFrom|required',
-            'shipmentType' => 'string|required',
-            'shipmentPackCount' => 'numeric|sometimes',
-            'shipmentWeight' => 'numeric|sometimes',
-            'senderClient' => 'array|required',
-            'senderAgent' => 'array|sometimes',
-            'senderAddress' => 'array|sometimes',
+            'dateFrom' => 'date_format:Y-m-d|required',
+            'dateTo' => 'date_format:Y-m-d|required',
         ];
     }
 
@@ -49,7 +44,7 @@ class Courier
     public function validated(): array
     {
         $validator = Validator::make(
-            $this->courier,
+            $this->payment,
             $this->validationRules()
         );
 

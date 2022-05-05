@@ -7,9 +7,12 @@ use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontQuarter;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
+use Gdinko\Econt\Traits\ValidatesImport;
 
 class SyncCarrierEcontQuarters extends Command
 {
+    use ValidatesImport;
+    
     /**
      * The name and signature of the console command.
      *
@@ -68,7 +71,12 @@ class SyncCarrierEcontQuarters extends Command
 
         return 0;
     }
-
+    
+    /**
+     * import
+     *
+     * @return void
+     */
     protected function import()
     {
         $quarters = Econt::getQuarters();
@@ -77,11 +85,11 @@ class SyncCarrierEcontQuarters extends Command
 
         $bar->start();
 
-        if (! empty($quarters)) {
+        if (!empty($quarters)) {
             CarrierEcontQuarter::truncate();
 
             foreach ($quarters as $quarter) {
-                $validated = $this->validator($quarter);
+                $validated = $this->validated($quarter);
 
                 CarrierEcontQuarter::create([
                     'econt_quarter_id' => $validated['id'],
@@ -96,24 +104,19 @@ class SyncCarrierEcontQuarters extends Command
 
         $bar->finish();
     }
-
-    protected function validator(array $data)
+    
+    /**
+     * validationRules
+     *
+     * @return array
+     */
+    protected function validationRules(): array
     {
-        $validator = Validator::make($data, [
+        return [
             'id' => 'integer|nullable',
             'cityID' => 'integer|required',
             'name' => 'string|required',
             'nameEn' => 'string|nullable',
-        ]);
-
-        if ($validator->fails()) {
-            throw new EcontImportValidationException(
-                __CLASS__,
-                422,
-                $validator->messages()->toArray()
-            );
-        }
-
-        return $validator->validated();
+        ];
     }
 }
