@@ -2,17 +2,17 @@
 
 namespace Gdinko\Econt\Commands;
 
-use Illuminate\Console\Command;
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
-use Gdinko\Econt\Models\CarrierEcontPayment;
 use Gdinko\Econt\Hydrators\Payment;
+use Gdinko\Econt\Models\CarrierEcontPayment;
 use Gdinko\Econt\Traits\ValidatesImport;
+use Illuminate\Console\Command;
 
 class GetCarrierEcontPayments extends Command
 {
     use ValidatesImport;
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -88,15 +88,14 @@ class GetCarrierEcontPayments extends Command
     {
         $payments = Econt::paymentReport(new Payment([
             'dateFrom' => $dateFrom,
-            'dateTo' => $dateTo
+            'dateTo' => $dateTo,
         ]));
 
         $bar = $this->output->createProgressBar(count($payments));
 
         $bar->start();
 
-        if (!empty($payments)) {
-
+        if (! empty($payments)) {
             foreach ($payments as $payment) {
                 $validated = $this->validated($payment);
 

@@ -44,6 +44,6 @@ class CarrierEcontPayment extends Model
         'pay_date',
         'amount',
         'currency',
-        'created_time'
+        'created_time',
     ];
 }

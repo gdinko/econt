@@ -5,14 +5,13 @@ namespace Gdinko\Econt\Commands;
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontStreet;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Validator;
 use Gdinko\Econt\Traits\ValidatesImport;
+use Illuminate\Console\Command;
 
 class SyncCarrierEcontStreets extends Command
 {
     use ValidatesImport;
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -71,7 +70,7 @@ class SyncCarrierEcontStreets extends Command
 
         return 0;
     }
-    
+
     /**
      * import
      *
@@ -85,7 +84,7 @@ class SyncCarrierEcontStreets extends Command
 
         $bar->start();
 
-        if (!empty($cities)) {
+        if (! empty($cities)) {
             CarrierEcontStreet::truncate();
 
             foreach ($cities as $city) {

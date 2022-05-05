@@ -5,8 +5,8 @@ namespace Gdinko\Econt\Commands;
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontCity;
-use Illuminate\Console\Command;
 use Gdinko\Econt\Traits\ValidatesImport;
+use Illuminate\Console\Command;
 
 class SyncCarrierEcontCities extends Command
 {
@@ -70,7 +70,7 @@ class SyncCarrierEcontCities extends Command
 
         return 0;
     }
-    
+
     /**
      * import
      *
@@ -84,7 +84,7 @@ class SyncCarrierEcontCities extends Command
 
         $bar->start();
 
-        if (!empty($cities)) {
+        if (! empty($cities)) {
             CarrierEcontCity::truncate();
 
             foreach ($cities as $city) {

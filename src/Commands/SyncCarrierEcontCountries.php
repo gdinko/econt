@@ -5,8 +5,8 @@ namespace Gdinko\Econt\Commands;
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontCountry;
-use Illuminate\Console\Command;
 use Gdinko\Econt\Traits\ValidatesImport;
+use Illuminate\Console\Command;
 
 class SyncCarrierEcontCountries extends Command
 {
@@ -70,7 +70,7 @@ class SyncCarrierEcontCountries extends Command
 
         return 0;
     }
-    
+
     /**
      * import
      *
@@ -84,7 +84,7 @@ class SyncCarrierEcontCountries extends Command
 
         $bar->start();
 
-        if (!empty($countries)) {
+        if (! empty($countries)) {
             CarrierEcontCountry::truncate();
 
             foreach ($countries as $country) {

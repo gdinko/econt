@@ -5,9 +5,9 @@ namespace Gdinko\Econt\Commands;
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontOffice;
+use Gdinko\Econt\Traits\ValidatesImport;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
-use Gdinko\Econt\Traits\ValidatesImport;
 
 class SyncCarrierEcontOffices extends Command
 {
@@ -71,7 +71,7 @@ class SyncCarrierEcontOffices extends Command
 
         return 0;
     }
-    
+
     /**
      * import
      *
@@ -85,7 +85,7 @@ class SyncCarrierEcontOffices extends Command
 
         $bar->start();
 
-        if (!empty($offices)) {
+        if (! empty($offices)) {
             CarrierEcontOffice::truncate();
 
             foreach ($offices as $office) {

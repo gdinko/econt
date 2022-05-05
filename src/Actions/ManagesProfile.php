@@ -3,7 +3,7 @@
 namespace Gdinko\Econt\Actions;
 
 trait ManagesProfile
-{    
+{
     /**
      * getClientProfiles
      *

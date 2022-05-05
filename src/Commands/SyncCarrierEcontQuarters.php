@@ -5,14 +5,13 @@ namespace Gdinko\Econt\Commands;
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontQuarter;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Validator;
 use Gdinko\Econt\Traits\ValidatesImport;
+use Illuminate\Console\Command;
 
 class SyncCarrierEcontQuarters extends Command
 {
     use ValidatesImport;
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -71,7 +70,7 @@ class SyncCarrierEcontQuarters extends Command
 
         return 0;
     }
-    
+
     /**
      * import
      *
@@ -85,7 +84,7 @@ class SyncCarrierEcontQuarters extends Command
 
         $bar->start();
 
-        if (!empty($quarters)) {
+        if (! empty($quarters)) {
             CarrierEcontQuarter::truncate();
 
             foreach ($quarters as $quarter) {
@@ -104,7 +103,7 @@ class SyncCarrierEcontQuarters extends Command
 
         $bar->finish();
     }
-    
+
     /**
      * validationRules
      *

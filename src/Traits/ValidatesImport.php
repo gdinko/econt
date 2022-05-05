@@ -2,8 +2,8 @@
 
 namespace Gdinko\Econt\Traits;
 
-use Illuminate\Support\Facades\Validator;
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
+use Illuminate\Support\Facades\Validator;
 
 trait ValidatesImport
 {
