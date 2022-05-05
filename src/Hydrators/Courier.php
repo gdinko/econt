@@ -43,7 +43,7 @@ class Courier
      * validated
      *
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function validated(): array

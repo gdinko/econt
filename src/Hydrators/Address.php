@@ -48,7 +48,7 @@ class Address
      * validated
      *
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function validated(): array

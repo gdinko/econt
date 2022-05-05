@@ -5,13 +5,13 @@ namespace Gdinko\Econt\Actions;
 use Gdinko\Econt\Hydrators\Courier;
 
 trait ManagesShipments
-{    
+{
     /**
      * requestCourier
      *
      * @param  \Gdinko\Econt\Hydrators\Courier $courier
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function requestCourier(Courier $courier): array
@@ -21,13 +21,13 @@ trait ManagesShipments
             $courier->validated(),
         );
     }
-    
+
     /**
      * getRequestCourierStatus
      *
      * @param  array $requestCourierIds
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function getRequestCourierStatus(array $requestCourierIds): array
@@ -37,13 +37,13 @@ trait ManagesShipments
             ['requestCourierIds' => $requestCourierIds],
         );
     }
-    
+
     /**
      * getShipmentStatuses
      *
      * @param  array $shipmentNumbers
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function getShipmentStatuses(array $shipmentNumbers): array

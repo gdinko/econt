@@ -4,8 +4,8 @@ namespace Gdinko\Econt\Enums;
 
 final class LabelMode
 {
-    const CALCULATE = 'calculate';
-    const VALIDATE = 'validate';
-    const CREATE = 'create';
-    const CALCULATE_WITH_BLOCK = 'calculate_with_block';
+    public const CALCULATE = 'calculate';
+    public const VALIDATE = 'validate';
+    public const CREATE = 'create';
+    public const CALCULATE_WITH_BLOCK = 'calculate_with_block';
 }

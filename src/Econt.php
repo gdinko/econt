@@ -4,12 +4,12 @@ namespace Gdinko\Econt;
 
 class Econt
 {
-    use MakesHttpRequests,
-        Actions\ManagesNomenclatures,
-        Actions\ManagesLabels,
-        Actions\ManagesShipments,
-        Actions\ManagesProfile,
-        Actions\ManagesPaymentReports;
+    use MakesHttpRequests;
+    use Actions\ManagesNomenclatures;
+    use Actions\ManagesLabels;
+    use Actions\ManagesShipments;
+    use Actions\ManagesProfile;
+    use Actions\ManagesPaymentReports;
 
 
     /**

@@ -17,7 +17,7 @@ class Label
 
     /**
      * __construct
-     * 
+     *
      * @param  array $label
      * @param  string $mode
      * @param  DateTime $requestCourierTimeFrom
@@ -101,7 +101,7 @@ class Label
      * validated
      *
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function validated(): array

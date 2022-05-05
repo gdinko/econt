@@ -12,7 +12,7 @@ trait ManagesLabels
      *
      * @param  \Gdinko\Econt\Hydrators\Label $label
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function createLabel(Label $label): array
@@ -28,7 +28,7 @@ trait ManagesLabels
      *
      * @param  \Gdinko\Econt\Hydrators\Labels $labels
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function createLabels(Labels $labels): array
@@ -44,7 +44,7 @@ trait ManagesLabels
      *
      * @param  array $shipmentNumbers
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function deleteLabels(array $shipmentNumbers): array
@@ -60,7 +60,7 @@ trait ManagesLabels
      *
      * @param  \Gdinko\Econt\Hydrators\Label $label
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function updateLabel(Label $label): array

@@ -15,7 +15,7 @@ class Labels
 
     /**
      * __construct
-     * 
+     *
      * @param  array $labels
      * @param  string $mode
      * @param  string $runAsyncAndEmailResultTo
@@ -95,7 +95,7 @@ class Labels
      * validated
      *
      * @return array
-     * 
+     *
      * @throws Exception
      */
     public function validated(): array
