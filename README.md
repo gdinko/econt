@@ -56,6 +56,28 @@ try {
 }
 ```
 
+Get Streets
+```php
+try {
+    dd(Econt::getStreets(10));
+} catch (EcontException $ee) {
+    echo $ee->getMessage();
+    print_r($ee->getErrors());
+    exit;
+}
+```
+
+Get Quarters
+```php
+try {
+    dd(Econt::getQuarters(10));
+} catch (EcontException $ee) {
+    echo $ee->getMessage();
+    print_r($ee->getErrors());
+    exit;
+}
+```
+
 ### Testing
 
 ```bash

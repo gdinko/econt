@@ -28,19 +28,19 @@ class Address
     protected function validationRules(): array
     {
         return [
-            'id' => 'integer|sometimes',
-            'city' => 'array|sometimes',
-            'city.name' => 'string|sometimes|required_without:fullAddress',
-            'fullAddress' => 'string|sometimes',
-            'quarter' => 'string|sometimes|required_without_all:fullAddress,street',
-            'street' => 'string|sometimes|required_without_all:fullAddress,quarter|required_with:num',
-            'num' => 'string|sometimes|required_without_all:fullAddress,quarter|required_with:street',
-            'other' => 'string|sometimes',
-            'location' => 'array|sometimes',
-            'location.latitude' => 'integer|sometimes|required_with:location.longitude',
-            'location.longitude' => 'integer|sometimes|required_with:location.latitude',
-            'location.confidence' => 'integer|sometimes',
-            'zip' => 'string|sometimes',
+            'id' => 'integer|nullable',
+            'city' => 'array|nullable',
+            'city.name' => 'string|nullable|required_without:fullAddress',
+            'fullAddress' => 'string|nullable',
+            'quarter' => 'string|nullable|required_without_all:fullAddress,street',
+            'street' => 'string|nullable|required_without_all:fullAddress,quarter|required_with:num',
+            'num' => 'string|nullable|required_without_all:fullAddress,quarter|required_with:street',
+            'other' => 'string|nullable',
+            'location' => 'array|nullable',
+            'location.latitude' => 'integer|nullable|required_with:location.longitude',
+            'location.longitude' => 'integer|nullable|required_with:location.latitude',
+            'location.confidence' => 'integer|nullable',
+            'zip' => 'string|nullable',
         ];
     }
 

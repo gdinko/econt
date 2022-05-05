@@ -38,21 +38,6 @@ trait ManagesLabels
     }
 
     /**
-     * deleteLabels
-     *
-     * @param  array $shipmentNumbers
-     * @return array
-     *
-     */
-    public function deleteLabels(array $shipmentNumbers): array
-    {
-        return $this->post(
-            'Shipments/LabelService.deleteLabels.json',
-            ['shipmentNumbers' => $shipmentNumbers]
-        )['results'];
-    }
-
-    /**
      * updateLabel
      *
      * @param  \Gdinko\Econt\Hydrators\Label $label
@@ -65,5 +50,20 @@ trait ManagesLabels
             'Shipments/LabelService.updateLabel.json',
             $label->validated(),
         );
+    }
+
+    /**
+     * deleteLabels
+     *
+     * @param  array $shipmentNumbers
+     * @return array
+     *
+     */
+    public function deleteLabels(array $shipmentNumbers): array
+    {
+        return $this->post(
+            'Shipments/LabelService.deleteLabels.json',
+            ['shipmentNumbers' => $shipmentNumbers]
+        )['results'];
     }
 }
