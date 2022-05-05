@@ -4,8 +4,13 @@ namespace Gdinko\Econt;
 
 class Econt
 {
-    use MakesHttpRequests;
-    use Actions\ManagesNomenclatures;
+    use MakesHttpRequests,
+        Actions\ManagesNomenclatures,
+        Actions\ManagesLabels,
+        Actions\ManagesShipments,
+        Actions\ManagesProfile,
+        Actions\ManagesPaymentReports;
+
 
     /**
      * Econt API username
