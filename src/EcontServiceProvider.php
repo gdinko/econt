@@ -2,6 +2,7 @@
 
 namespace Gdinko\Econt;
 
+use Gdinko\Econt\Commands\GetCarrierEcontApiStatus;
 use Gdinko\Econt\Commands\GetCarrierEcontPayments;
 use Gdinko\Econt\Commands\SyncCarrierEcontAll;
 use Gdinko\Econt\Commands\SyncCarrierEcontCities;
@@ -34,6 +35,7 @@ class EcontServiceProvider extends ServiceProvider
                 SyncCarrierEcontStreets::class,
                 SyncCarrierEcontQuarters::class,
                 GetCarrierEcontPayments::class,
+                GetCarrierEcontApiStatus::class,
             ]);
         }
     }

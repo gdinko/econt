@@ -98,6 +98,9 @@ php artisan sync:carrier-econt-all
 
 #get today payments
 php artisan get:carrier-econt-payments
+
+#get econt api status
+php artisan get:carrier-econt-api-status
 ```
 
 Models
@@ -108,6 +111,7 @@ CarrierEcontOffice
 CarrierEcontStreet
 CarrierEcontQuarter
 CarrierEcontPayment
+CarrierEcontApiStatus
 ```
 
 ## Examples
