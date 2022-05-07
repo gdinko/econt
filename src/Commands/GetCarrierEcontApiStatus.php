@@ -2,14 +2,14 @@
 
 namespace Gdinko\Econt\Commands;
 
+use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontApiStatus;
 use Illuminate\Console\Command;
-use Gdinko\Econt\Facades\Econt;
 
 class GetCarrierEcontApiStatus extends Command
 {
-    const API_STATUS_OK = 200;
-    const API_STATUS_NOT_OK = 404;
+    public const API_STATUS_OK = 200;
+    public const API_STATUS_NOT_OK = 404;
 
     /**
      * The name and signature of the console command.
@@ -51,17 +51,16 @@ class GetCarrierEcontApiStatus extends Command
 
             $countries = Econt::getCountries();
 
-            if (!empty($countries)) {
+            if (! empty($countries)) {
                 CarrierEcontApiStatus::create([
-                    'code' => self::API_STATUS_OK
+                    'code' => self::API_STATUS_OK,
                 ]);
 
                 $this->info('Status: ' . self::API_STATUS_OK);
             }
         } catch (\Exception $e) {
-
             CarrierEcontApiStatus::create([
-                'code' => self::API_STATUS_NOT_OK
+                'code' => self::API_STATUS_NOT_OK,
             ]);
 
             $this->newLine();
