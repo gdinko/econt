@@ -4,9 +4,9 @@ namespace Gdinko\Econt\Tests;
 
 use Gdinko\Econt\EcontServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
@@ -30,7 +30,6 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-
         config()->set('database.default', 'sqlite');
         config()->set('database.connections.sqlite', [
             'driver' => 'sqlite',
