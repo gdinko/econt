@@ -18,7 +18,7 @@ class SyncCarrierEcontOffices extends Command
      *
      * @var string
      */
-    protected $signature = 'sync:carrier-econt-offices {--timeout=20 : Econt API Call timeout}';
+    protected $signature = 'econt:sync-offices {--timeout=20 : Econt API Call timeout}';
 
     /**
      * The console command description.

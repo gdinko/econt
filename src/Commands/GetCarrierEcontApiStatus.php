@@ -16,7 +16,7 @@ class GetCarrierEcontApiStatus extends Command
      *
      * @var string
      */
-    protected $signature = 'get:carrier-econt-api-status {--timeout=5 : Econt API Call timeout}';
+    protected $signature = 'econt:api-status {--timeout=5 : Econt API Call timeout}';
 
     /**
      * The console command description.

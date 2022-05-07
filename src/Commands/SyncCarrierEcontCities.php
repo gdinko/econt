@@ -17,7 +17,7 @@ class SyncCarrierEcontCities extends Command
      *
      * @var string
      */
-    protected $signature = 'sync:carrier-econt-cities {--timeout=20 : Econt API Call timeout}';
+    protected $signature = 'econt:sync-cities {--timeout=20 : Econt API Call timeout}';
 
     /**
      * The console command description.

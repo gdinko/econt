@@ -18,7 +18,7 @@ class GetCarrierEcontPayments extends Command
      *
      * @var string
      */
-    protected $signature = 'get:carrier-econt-payments {--date_from} {--date_to} {--timeout=20 : Econt API Call timeout}';
+    protected $signature = 'econt:get-payments {--date_from} {--date_to} {--timeout=20 : Econt API Call timeout}';
 
     /**
      * The console command description.

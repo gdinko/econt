@@ -17,7 +17,7 @@ class SyncCarrierEcontQuarters extends Command
      *
      * @var string
      */
-    protected $signature = 'sync:carrier-econt-quarters {--timeout=20 : Econt API Call timeout}';
+    protected $signature = 'econt:sync-quarters {--timeout=20 : Econt API Call timeout}';
 
     /**
      * The console command description.

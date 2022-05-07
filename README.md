@@ -79,28 +79,28 @@ Commands
 
 ```bash
 #sync countries with database
-php artisan sync:carrier-econt-countries  
+php artisan econt:sync-countries  
 
 #sync cities with database
-php artisan sync:carrier-econt-cities 
+php artisan econt:sync-cities 
 
 #sync offices with database
-php artisan sync:carrier-econt-offices 
+php artisan econt:sync-offices 
 
 #sync querters with database
-php artisan sync:carrier-econt-quarters 
+php artisan econt:sync-quarters 
 
 #sync stretts with database
-php artisan sync:carrier-econt-streets
+php artisan econt:sync-streets
 
 #sync all nomenclatures with database
-php artisan sync:carrier-econt-all
+php artisan econt:sync-all
 
 #get today payments
-php artisan get:carrier-econt-payments
+php artisan econt:get-payments
 
 #get econt api status
-php artisan get:carrier-econt-api-status
+php artisan econt:api-status
 ```
 
 Models

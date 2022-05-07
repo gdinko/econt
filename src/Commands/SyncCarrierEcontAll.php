@@ -11,7 +11,7 @@ class SyncCarrierEcontAll extends Command
      *
      * @var string
      */
-    protected $signature = 'sync:carrier-econt-all {--timeout=20 : Econt API Call timeout}';
+    protected $signature = 'econt:sync-all {--timeout=20 : Econt API Call timeout}';
 
     /**
      * The console command description.
@@ -37,23 +37,23 @@ class SyncCarrierEcontAll extends Command
      */
     public function handle()
     {
-        $this->call('sync:carrier-econt-countries', [
+        $this->call('econt:sync-countries', [
             '--timeout' => $this->option('timeout'),
         ]);
 
-        $this->call('sync:carrier-econt-cities', [
+        $this->call('econt:sync-cities', [
             '--timeout' => $this->option('timeout'),
         ]);
 
-        $this->call('sync:carrier-econt-offices', [
+        $this->call('econt:sync-offices', [
             '--timeout' => $this->option('timeout'),
         ]);
 
-        $this->call('sync:carrier-econt-streets', [
+        $this->call('econt:sync-streets', [
             '--timeout' => $this->option('timeout'),
         ]);
 
-        $this->call('sync:carrier-econt-quarters', [
+        $this->call('econt:sync-quarters', [
             '--timeout' => $this->option('timeout'),
         ]);
 

@@ -17,7 +17,7 @@ class SyncCarrierEcontCountries extends Command
      *
      * @var string
      */
-    protected $signature = 'sync:carrier-econt-countries {--timeout=20 : Econt API Call timeout}';
+    protected $signature = 'econt:sync-countries {--timeout=20 : Econt API Call timeout}';
 
     /**
      * The console command description.
