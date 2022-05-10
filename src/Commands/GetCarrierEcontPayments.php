@@ -18,7 +18,7 @@ class GetCarrierEcontPayments extends Command
      *
      * @var string
      */
-    protected $signature = 'econt:get-payments {--date_from} {--date_to} {--timeout=20 : Econt API Call timeout}';
+    protected $signature = 'econt:get-payments {--date_from=} {--date_to=} {--timeout=20 : Econt API Call timeout}';
 
     /**
      * The console command description.
@@ -64,6 +64,9 @@ class GetCarrierEcontPayments extends Command
             $this->error(
                 $eive->getMessage()
             );
+            $this->info(
+                print_r($eive->getData(), true)
+            );
             $this->error(
                 print_r($eive->getErrors(), true)
             );
@@ -95,7 +98,7 @@ class GetCarrierEcontPayments extends Command
 
         $bar->start();
 
-        if (! empty($payments)) {
+        if (!empty($payments)) {
             foreach ($payments as $payment) {
                 $validated = $this->validated($payment);
 
@@ -127,7 +130,7 @@ class GetCarrierEcontPayments extends Command
             'num' => 'required',
             'type' => 'string|required',
             'payType' => 'string|required',
-            'payDate' => 'date_format:Y-m-d|required',
+            'payDate' => 'required',
             'amount' => 'numeric|required',
             'currency' => 'string|required',
             'createdTime' => 'date_format:Y-m-d H:i:s|required',

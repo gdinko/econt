@@ -58,6 +58,9 @@ class SyncCarrierEcontQuarters extends Command
             $this->error(
                 $eive->getMessage()
             );
+            $this->info(
+                print_r($eive->getData(), true)
+            );
             $this->error(
                 print_r($eive->getErrors(), true)
             );
@@ -84,7 +87,7 @@ class SyncCarrierEcontQuarters extends Command
 
         $bar->start();
 
-        if (! empty($quarters)) {
+        if (!empty($quarters)) {
             CarrierEcontQuarter::truncate();
 
             foreach ($quarters as $quarter) {

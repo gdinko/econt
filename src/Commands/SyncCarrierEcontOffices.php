@@ -59,6 +59,9 @@ class SyncCarrierEcontOffices extends Command
             $this->error(
                 $eive->getMessage()
             );
+            $this->info(
+                print_r($eive->getData(), true)
+            );
             $this->error(
                 print_r($eive->getErrors(), true)
             );
@@ -85,7 +88,7 @@ class SyncCarrierEcontOffices extends Command
 
         $bar->start();
 
-        if (! empty($offices)) {
+        if (!empty($offices)) {
             CarrierEcontOffice::truncate();
 
             foreach ($offices as $office) {

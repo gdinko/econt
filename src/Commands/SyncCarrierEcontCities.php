@@ -58,6 +58,9 @@ class SyncCarrierEcontCities extends Command
             $this->error(
                 $eive->getMessage()
             );
+            $this->info(
+                print_r($eive->getData(), true)
+            );
             $this->error(
                 print_r($eive->getErrors(), true)
             );
@@ -84,7 +87,7 @@ class SyncCarrierEcontCities extends Command
 
         $bar->start();
 
-        if (! empty($cities)) {
+        if (!empty($cities)) {
             CarrierEcontCity::truncate();
 
             foreach ($cities as $city) {

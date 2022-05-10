@@ -24,7 +24,8 @@ trait ValidatesImport
             throw new EcontImportValidationException(
                 __CLASS__,
                 422,
-                $validator->messages()->toArray()
+                $validator->messages()->toArray(),
+                $data
             );
         }
 

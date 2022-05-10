@@ -8,6 +8,8 @@ class EcontImportValidationException extends Exception
 {
     protected $errors = [];
 
+    protected $data = [];
+
     /**
      * __construct
      *
@@ -16,11 +18,13 @@ class EcontImportValidationException extends Exception
      * @param  array $errors Validation Errors
      * @return void
      */
-    public function __construct($message, $code = 0, $errors = [])
+    public function __construct($message, $code = 0, $errors = [], $data = [])
     {
         parent::__construct($message, $code);
 
         $this->errors = $errors;
+
+        $this->data = $data;
     }
 
     /**
@@ -31,5 +35,15 @@ class EcontImportValidationException extends Exception
     public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    /**
+     * getData
+     *
+     * @return array
+     */
+    public function getData(): array
+    {
+        return $this->data;
     }
 }

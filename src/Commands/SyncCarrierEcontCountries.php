@@ -58,6 +58,9 @@ class SyncCarrierEcontCountries extends Command
             $this->error(
                 $eive->getMessage()
             );
+            $this->info(
+                print_r($eive->getData(), true)
+            );
             $this->error(
                 print_r($eive->getErrors(), true)
             );
@@ -84,7 +87,7 @@ class SyncCarrierEcontCountries extends Command
 
         $bar->start();
 
-        if (! empty($countries)) {
+        if (!empty($countries)) {
             CarrierEcontCountry::truncate();
 
             foreach ($countries as $country) {
