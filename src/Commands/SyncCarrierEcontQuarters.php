@@ -87,7 +87,7 @@ class SyncCarrierEcontQuarters extends Command
 
         $bar->start();
 
-        if (!empty($quarters)) {
+        if (! empty($quarters)) {
             CarrierEcontQuarter::truncate();
 
             foreach ($quarters as $quarter) {

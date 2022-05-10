@@ -87,7 +87,7 @@ class SyncCarrierEcontStreets extends Command
 
         $bar->start();
 
-        if (!empty($cities)) {
+        if (! empty($cities)) {
             CarrierEcontStreet::truncate();
 
             foreach ($cities as $city) {

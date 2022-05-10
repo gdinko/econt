@@ -98,7 +98,7 @@ class GetCarrierEcontPayments extends Command
 
         $bar->start();
 
-        if (!empty($payments)) {
+        if (! empty($payments)) {
             foreach ($payments as $payment) {
                 $validated = $this->validated($payment);
 
