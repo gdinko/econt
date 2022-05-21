@@ -4,10 +4,6 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/gdinko/econt/run-tests?label=tests)](https://github.com/gdinko/econt/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/gdinko/econt/Check%20&%20fix%20styling?label=code%20style)](https://github.com/gdinko/econt/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/gdinko/econt.svg?style=flat-square)](https://packagist.org/packages/gdinko/econt)
-[![Test Coverage](https://raw.githubusercontent.com/gdinko/econt/master/badge-coverage.svg)](https://packagist.org/packages/gdinko/econt)
-
-
-Laravel Econt API Wrapper
 
 [Econt JSON API Documentation](http://ee.econt.com/services/)
 
@@ -51,6 +47,22 @@ Econt::setBaseUri('endpoint');
 Econt::setTimeout(99);
 ```
 
+Multiple Account Support In AppServiceProvider add accounts in boot method
+```php
+public function boot()
+{
+    Econt::addAccountToStore(
+        'AccountUser',
+        'AccountPass'
+    );
+
+    Econt::addAccountToStore(
+        'AccountUser_XXX',
+        'AccountPass_XXX'
+    );
+}
+```
+
 Methods
 ```php
 
@@ -78,29 +90,32 @@ Econt::paymentReport();
 Commands
 
 ```bash
-#sync countries with database
+#sync countries with database (use -h to view options)
 php artisan econt:sync-countries  
 
-#sync cities with database
+#sync cities with database (use -h to view options)
 php artisan econt:sync-cities 
 
-#sync offices with database
+#sync offices with database (use -h to view options)
 php artisan econt:sync-offices 
 
-#sync querters with database
+#sync querters with database (use -h to view options)
 php artisan econt:sync-quarters 
 
-#sync stretts with database
+#sync stretts with database (use -h to view options)
 php artisan econt:sync-streets
 
-#sync all nomenclatures with database
+#sync all nomenclatures with database (use -h to view options)
 php artisan econt:sync-all
 
-#get today payments
+#get payments (use -h to view options)
 php artisan econt:get-payments
 
-#get econt api status
+#get econt api status (use -h to view options)
 php artisan econt:api-status
+
+#track parcels (use -h to view options)
+php artisan econt:track
 ```
 
 Models
@@ -112,6 +127,52 @@ CarrierEcontStreet
 CarrierEcontQuarter
 CarrierEcontPayment
 CarrierEcontApiStatus
+CarrierEcontTracking
+```
+
+Events
+
+```php
+CarrierEcontTrackingEvent
+CarrierEcontPaymentEvent
+```
+
+## Parcels Tracking
+
+1. Subscribe to tracking event, you will recieve last tracking info, if tracking command is schduled
+
+```php
+Event::listen(function (CarrierEcontTrackingEvent $event) {
+    echo $event->account;
+    dd($event->tracking);
+});
+```
+
+2. Before use of tracking command you need to create your own command and define setUp method
+
+```bash
+php artisan make:command TrackCarrierEcont
+```
+
+3. In app/Console/Commands/TrackCarrierEcont define your logic for parcels to be tracked
+
+```php
+use Gdinko\Econt\Commands\TrackCarrierEcontBase;
+
+class TrackCarrierEcontSetup extends TrackCarrierEcontBase
+{
+    protected function setup()
+    {
+        //define parcel selection logic here
+        // $this->parcels = [];
+    }
+}
+```
+
+4. Use the command
+
+```bash
+php artisan econt:track
 ```
 
 ## Examples
@@ -359,6 +420,7 @@ If you discover any security related issues, please email dinko359@gmail.com ins
 ## Credits
 
 -   [Dinko Georgiev](https://github.com/gdinko)
+-   [silabg.com](https://www.silabg.com/) :heart:
 -   [All Contributors](../../contributors)
 
 ## License

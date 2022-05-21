@@ -5,6 +5,7 @@ namespace Gdinko\Econt\Commands;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierEcontApiStatus;
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 
 class GetCarrierEcontApiStatus extends Command
 {
@@ -16,7 +17,9 @@ class GetCarrierEcontApiStatus extends Command
      *
      * @var string
      */
-    protected $signature = 'econt:api-status {--timeout=5 : Econt API Call timeout}';
+    protected $signature = 'econt:api-status
+                            {--clear= : Clear Database table from records older than X days}
+                            {--timeout=5 : Econt API Call timeout}';
 
     /**
      * The console command description.
@@ -45,13 +48,16 @@ class GetCarrierEcontApiStatus extends Command
         $this->info('-> Carrier Econt Api Status');
 
         try {
+
+            $this->clear();
+
             Econt::setTimeout(
                 $this->option('timeout')
             );
 
             $countries = Econt::getCountries();
 
-            if (! empty($countries)) {
+            if (!empty($countries)) {
                 CarrierEcontApiStatus::create([
                     'code' => self::API_STATUS_OK,
                 ]);
@@ -71,5 +77,21 @@ class GetCarrierEcontApiStatus extends Command
         }
 
         return 0;
+    }
+
+    /**
+     * clear
+     *
+     * @return void
+     */
+    protected function clear()
+    {
+        if ($days = $this->option('clear')) {
+            $clearDate = Carbon::now()->subDays($days)->format('Y-m-d H:i:s');
+
+            $this->info("-> Carrier Econt Api Status : Clearing entries older than: {$clearDate}");
+
+            CarrierEcontApiStatus::where('created_at', '<=', $clearDate)->delete();
+        }
     }
 }

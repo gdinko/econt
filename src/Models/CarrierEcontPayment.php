@@ -32,12 +32,18 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontPayment whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontPayment whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $carrier_signature
+ * @property string $carrier_account
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontPayment whereCarrierAccount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontPayment whereCarrierSignature($value)
  */
 class CarrierEcontPayment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'carrier_signature',
+        'carrier_account',
         'num',
         'type',
         'pay_type',

@@ -2,12 +2,14 @@
 
 namespace Gdinko\Econt\Commands;
 
+use Gdinko\Econt\Events\CarrierEcontPaymentEvent;
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Hydrators\Payment;
 use Gdinko\Econt\Models\CarrierEcontPayment;
 use Gdinko\Econt\Traits\ValidatesImport;
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 
 class GetCarrierEcontPayments extends Command
 {
@@ -18,7 +20,12 @@ class GetCarrierEcontPayments extends Command
      *
      * @var string
      */
-    protected $signature = 'econt:get-payments {--date_from=} {--date_to=} {--timeout=20 : Econt API Call timeout}';
+    protected $signature = 'econt:get-payments
+                            {--account= : Set Econt API Account} 
+                            {--date_from=} 
+                            {--date_to=}
+                            {--clear= : Clear Database table from records older than X days}
+                            {--timeout=20 : Econt API Call timeout}';
 
     /**
      * The console command description.
@@ -47,6 +54,11 @@ class GetCarrierEcontPayments extends Command
         $this->info('-> Carrier Econt Import Payments');
 
         try {
+
+            $this->setAccount();
+
+            $this->clear();
+
             Econt::setTimeout(
                 $this->option('timeout')
             );
@@ -81,6 +93,36 @@ class GetCarrierEcontPayments extends Command
     }
 
     /**
+     * setAccount
+     *
+     * @return void
+     */
+    protected function setAccount()
+    {
+        if ($this->option('account')) {
+            Econt::setAccountFromStore(
+                $this->option('account')
+            );
+        }
+    }
+
+    /**
+     * clear
+     *
+     * @return void
+     */
+    protected function clear()
+    {
+        if ($days = $this->option('clear')) {
+            $clearDate = Carbon::now()->subDays($days)->format('Y-m-d H:i:s');
+
+            $this->info("-> Carrier Econt Import Payments : Clearing entries older than: {$clearDate}");
+
+            CarrierEcontPayment::where('created_at', '<=', $clearDate)->delete();
+        }
+    }
+
+    /**
      * import
      *
      * @param  mixed $dateFrom
@@ -98,11 +140,13 @@ class GetCarrierEcontPayments extends Command
 
         $bar->start();
 
-        if (! empty($payments)) {
+        if (!empty($payments)) {
             foreach ($payments as $payment) {
                 $validated = $this->validated($payment);
 
-                CarrierEcontPayment::create([
+                $carrierEcontPayment = CarrierEcontPayment::create([
+                    'carrier_signature' => Econt::getSignature(),
+                    'carrier_account' => Econt::getUser(),
                     'num' => $validated['num'],
                     'type' => $validated['type'],
                     'pay_type' => $validated['payType'],
@@ -111,6 +155,11 @@ class GetCarrierEcontPayments extends Command
                     'currency' => $validated['currency'],
                     'created_time' => $validated['createdTime'],
                 ]);
+
+                CarrierEcontPaymentEvent::dispatch(
+                    $carrierEcontPayment,
+                    Econt::getUser()
+                );
 
                 $bar->advance();
             }
