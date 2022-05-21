@@ -117,7 +117,7 @@ class Econt
     /**
      * setBaseUri
      *
-     * @param  mixed $baseUri
+     * @param  string $baseUri
      * @return void
      */
     public function setBaseUri(string $baseUri)

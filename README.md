@@ -45,6 +45,9 @@ Runtime Setup
 Econt::setAccount('user', 'pass');
 Econt::setBaseUri('endpoint');
 Econt::setTimeout(99);
+Econt::addAccountToStore('AccountUser', 'AccountPass');
+Econt::getAccountFromStore('AccountUser');
+Econt::setAccountFromStore('AccountUser');
 ```
 
 Multiple Account Support In AppServiceProvider add accounts in boot method
