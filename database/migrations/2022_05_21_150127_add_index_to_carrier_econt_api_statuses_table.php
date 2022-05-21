@@ -26,7 +26,7 @@ class AddIndexToCarrierEcontApiStatusesTable extends Migration
     public function down()
     {
         Schema::table('carrier_econt_api_statuses', function (Blueprint $table) {
-            //
+            $table->dropIndex(['created_at']);
         });
     }
 }

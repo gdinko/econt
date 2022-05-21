@@ -26,7 +26,7 @@ class AddIndexToCarrierEcontPaymentsTable extends Migration
     public function down()
     {
         Schema::table('carrier_econt_payments', function (Blueprint $table) {
-            //
+            $table->dropIndex(['created_at']);
         });
     }
 }

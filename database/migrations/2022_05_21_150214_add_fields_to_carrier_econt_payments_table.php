@@ -14,8 +14,8 @@ class AddFieldsToCarrierEcontPaymentsTable extends Migration
     public function up()
     {
         Schema::table('carrier_econt_payments', function (Blueprint $table) {
-            $table->string('carrier_signature')->after('id')->index();
-            $table->string('carrier_account')->after('carrier_signature')->index();
+            $table->string('carrier_signature')->after('id')->nullable()->index();
+            $table->string('carrier_account')->after('carrier_signature')->nullable()->index();
         });
     }
 
@@ -27,7 +27,8 @@ class AddFieldsToCarrierEcontPaymentsTable extends Migration
     public function down()
     {
         Schema::table('carrier_econt_payments', function (Blueprint $table) {
-            //
+            $table->dropColumn('carrier_signature');
+            $table->dropColumn('carrier_account');
         });
     }
 }
