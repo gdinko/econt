@@ -48,7 +48,6 @@ class GetCarrierEcontApiStatus extends Command
         $this->info('-> Carrier Econt Api Status');
 
         try {
-
             $this->clear();
 
             Econt::setTimeout(
@@ -57,7 +56,7 @@ class GetCarrierEcontApiStatus extends Command
 
             $countries = Econt::getCountries();
 
-            if (!empty($countries)) {
+            if (! empty($countries)) {
                 CarrierEcontApiStatus::create([
                     'code' => self::API_STATUS_OK,
                 ]);

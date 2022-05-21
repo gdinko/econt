@@ -5,7 +5,6 @@ namespace Gdinko\Econt\Commands;
 use Gdinko\Econt\Events\CarrierEcontTrackingEvent;
 use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
-use Gdinko\Econt\Hydrators\Request;
 use Gdinko\Econt\Models\CarrierEcontTracking;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
@@ -53,7 +52,6 @@ abstract class TrackCarrierEcontBase extends Command
         $this->info('-> Carrier Econt Parcel Tracking');
 
         try {
-
             $this->setAccount();
 
             $this->setup();
@@ -138,12 +136,12 @@ abstract class TrackCarrierEcontBase extends Command
 
         $bar->start();
 
-        if (!empty($this->parcels)) {
+        if (! empty($this->parcels)) {
             $trackingInfo = Econt::getShipmentStatuses(
                 $this->parcels
             );
 
-            if (!empty($trackingInfo)) {
+            if (! empty($trackingInfo)) {
                 $this->processTracking($trackingInfo, $bar);
             }
         }
@@ -172,7 +170,7 @@ abstract class TrackCarrierEcontBase extends Command
                 ]
             );
 
-            if (!$this->muteEvents) {
+            if (! $this->muteEvents) {
                 CarrierEcontTrackingEvent::dispatch(
                     array_pop($tracking['status']['trackingEvents']),
                     Econt::getUser()

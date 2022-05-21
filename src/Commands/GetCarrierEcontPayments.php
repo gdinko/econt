@@ -54,7 +54,6 @@ class GetCarrierEcontPayments extends Command
         $this->info('-> Carrier Econt Import Payments');
 
         try {
-
             $this->setAccount();
 
             $this->clear();
@@ -140,7 +139,7 @@ class GetCarrierEcontPayments extends Command
 
         $bar->start();
 
-        if (!empty($payments)) {
+        if (! empty($payments)) {
             foreach ($payments as $payment) {
                 $validated = $this->validated($payment);
 
