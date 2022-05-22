@@ -21,14 +21,14 @@ return [
     'pass' => env('ECONT_API_PASS', 'iasp-dev'),
 
     /**
-     * Default Econt test base uri
+     * Default Econt test base url
      */
-    'test-base-uri' => rtrim(env('ECONT_API_TEST_BASE_URI', 'https://demo.econt.com/ee/services/'), '/'),
+    'test-base-url' => rtrim(env('ECONT_API_TEST_BASE_URI', 'https://demo.econt.com/ee/services/'), '/'),
 
     /**
-     * Default Econt production base uri
+     * Default Econt production base url
      */
-    'production-base-uri' => rtrim(env('ECONT_API_PRODUCTION_BASE_URI', 'https://ee.econt.com/services/'), '/'),
+    'production-base-url' => rtrim(env('ECONT_API_PRODUCTION_BASE_URI', 'https://ee.econt.com/services/'), '/'),
 
     /**
      * Set Request timeout

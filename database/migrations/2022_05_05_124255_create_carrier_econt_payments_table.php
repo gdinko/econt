@@ -16,6 +16,8 @@ class CreateCarrierEcontPaymentsTable extends Migration
         Schema::create('carrier_econt_payments', function (Blueprint $table) {
             $table->id();
 
+            $table->string('carrier_signature')->index();
+            $table->string('carrier_account')->index();
             $table->string('num')->index()->unique();
             $table->string('type')->index();
             $table->string('pay_type');
@@ -25,6 +27,8 @@ class CreateCarrierEcontPaymentsTable extends Migration
             $table->timestamp('created_time');
 
             $table->timestamps();
+
+            $table->index('created_at');
         });
     }
 

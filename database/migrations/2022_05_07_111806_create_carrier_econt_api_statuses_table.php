@@ -19,6 +19,8 @@ class CreateCarrierEcontApiStatusesTable extends Migration
             $table->integer('code');
 
             $table->timestamps();
+
+            $table->index('created_at');
         });
     }
 

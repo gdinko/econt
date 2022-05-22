@@ -61,7 +61,7 @@ ECONT_API_TIMEOUT= #default=5
 Runtime Setup
 ```php
 Econt::setAccount('user', 'pass');
-Econt::setBaseUri('endpoint');
+Econt::setBaseUrl('endpoint');
 Econt::setTimeout(99);
 Econt::addAccountToStore('AccountUser', 'AccountPass');
 Econt::getAccountFromStore('AccountUser');

@@ -12,12 +12,12 @@ test('setup default econt object', function () {
         'pass' => config('econt.pass'),
     ]);
 
-    $defaultBaseUri = config('econt.production-base-uri');
+    $defaultBaseUrl = config('econt.production-base-url');
     if (config('econt.env') == 'test') {
-        $defaultBaseUri = config('econt.test-base-uri');
+        $defaultBaseUrl = config('econt.test-base-url');
     }
 
-    expect($econt->getBaseUri())->toEqual($defaultBaseUri);
+    expect($econt->getBaseUrl())->toEqual($defaultBaseUrl);
 
     expect($econt->getTimeout())->toEqual(config('econt.timeout'));
 });
@@ -33,8 +33,8 @@ test('set props of econt object', function () {
         'pass' => 'pass',
     ]);
 
-    $econt->setBaseUri('endpoint');
-    expect($econt->getBaseUri())->toEqual('endpoint');
+    $econt->setBaseUrl('endpoint');
+    expect($econt->getBaseUrl())->toEqual('endpoint');
 
     $econt->setTimeout(99);
     expect($econt->getTimeout())->toEqual(99);
@@ -45,7 +45,7 @@ test('set test endpoint of econt object', function () {
 
     $econt = new Econt();
 
-    expect($econt->getBaseUri())->toEqual(config('econt.test-base-uri'));
+    expect($econt->getBaseUrl())->toEqual(config('econt.test-base-url'));
 });
 
 test('set production endpoint of econt object', function () {
@@ -53,5 +53,5 @@ test('set production endpoint of econt object', function () {
 
     $econt = new Econt();
 
-    expect($econt->getBaseUri())->toEqual(config('econt.production-base-uri'));
+    expect($econt->getBaseUrl())->toEqual(config('econt.production-base-url'));
 });

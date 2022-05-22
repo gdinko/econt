@@ -34,9 +34,9 @@ class Econt
     protected $accountStore = [];
 
     /**
-     * Econt API Base Uri
+     * Econt API Base Url
      */
-    protected $baseUri;
+    protected $baseUrl;
 
     /**
      * Econt API Request timeout
@@ -51,20 +51,20 @@ class Econt
 
         $this->timeout = config('econt.timeout');
 
-        $this->configBaseUri();
+        $this->configBaseUrl();
     }
 
     /**
-     * configBaseUri
+     * configBaseUrl
      *
      * @return void
      */
-    public function configBaseUri()
+    public function configBaseUrl()
     {
-        $this->baseUri = config('econt.production-base-uri');
+        $this->baseUrl = config('econt.production-base-url');
 
         if (config('econt.env') == 'test') {
-            $this->baseUri = config('econt.test-base-uri');
+            $this->baseUrl = config('econt.test-base-url');
         }
     }
 
@@ -115,24 +115,24 @@ class Econt
     }
 
     /**
-     * setBaseUri
+     * setBaseUrl
      *
-     * @param  string $baseUri
+     * @param  string $baseUrl
      * @return void
      */
-    public function setBaseUri(string $baseUri)
+    public function setBaseUrl(string $baseUrl)
     {
-        $this->baseUri = rtrim($baseUri, '/');
+        $this->baseUrl = rtrim($baseUrl, '/');
     }
 
     /**
-     * getBaseUri
+     * getBaseUrl
      *
      * @return string
      */
-    public function getBaseUri(): string
+    public function getBaseUrl(): string
     {
-        return $this->baseUri;
+        return $this->baseUrl;
     }
 
     /**
