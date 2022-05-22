@@ -145,7 +145,7 @@ class GetCarrierEcontPayments extends Command
 
                 $carrierEcontPayment = CarrierEcontPayment::create([
                     'carrier_signature' => Econt::getSignature(),
-                    'carrier_account' => Econt::getUser(),
+                    'carrier_account' => Econt::getUserName(),
                     'num' => $validated['num'],
                     'type' => $validated['type'],
                     'pay_type' => $validated['payType'],
@@ -157,7 +157,7 @@ class GetCarrierEcontPayments extends Command
 
                 CarrierEcontPaymentEvent::dispatch(
                     $carrierEcontPayment,
-                    Econt::getUser()
+                    Econt::getUserName()
                 );
 
                 $bar->advance();

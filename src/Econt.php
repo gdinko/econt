@@ -95,13 +95,23 @@ class Econt
     }
 
     /**
-     * getUser
+     * getUserName
      *
      * @return string
      */
-    public function getUser(): string
+    public function getUserName(): string
     {
         return $this->user;
+    }
+
+    /**
+     * getPassword
+     *
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->pass;
     }
 
     /**

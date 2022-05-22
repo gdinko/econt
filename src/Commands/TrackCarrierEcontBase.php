@@ -165,7 +165,7 @@ abstract class TrackCarrierEcontBase extends Command
                 ],
                 [
                     'carrier_signature' => Econt::getSignature(),
-                    'carrier_account' => Econt::getUser(),
+                    'carrier_account' => Econt::getUserName(),
                     'meta' => $tracking['status'],
                 ]
             );
@@ -173,7 +173,7 @@ abstract class TrackCarrierEcontBase extends Command
             if (! $this->muteEvents) {
                 CarrierEcontTrackingEvent::dispatch(
                     array_pop($tracking['status']['trackingEvents']),
-                    Econt::getUser()
+                    Econt::getUserName()
                 );
             }
 
