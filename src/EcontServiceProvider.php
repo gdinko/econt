@@ -22,9 +22,22 @@ class EcontServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         if ($this->app->runningInConsole()) {
+
             $this->publishes([
                 __DIR__ . '/../config/econt.php' => config_path('econt.php'),
-            ], 'config');
+            ], 'econt-config');
+
+            $this->publishes([
+                __DIR__ . '/../database/migrations/' => database_path('migrations')
+            ], 'econt-migrations');
+
+            $this->publishes([
+                __DIR__ . '/Models/' => app_path('Models')
+            ], 'econt-models');
+
+            $this->publishes([
+                __DIR__ . '/Commands/' => app_path('Console/Commands')
+            ], 'econt-commands');
 
             // Registering package commands.
             $this->commands([

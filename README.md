@@ -24,7 +24,25 @@ php artisan migrate
 If you need to export configuration file:
 
 ```bash
-php artisan vendor:publish --provider="gdinko\econt\EcontServiceProvider" --tag=config
+php artisan vendor:publish --tag=econt-config
+```
+
+If you need to export migrations:
+
+```bash
+php artisan vendor:publish --tag=econt-migrations
+```
+
+If you need to export models:
+
+```bash
+php artisan vendor:publish --tag=econt-models
+```
+
+If you need to export commands:
+
+```bash
+php artisan vendor:publish --tag=econt-commands
 ```
 
 ## Configuration
