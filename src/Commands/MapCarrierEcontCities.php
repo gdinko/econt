@@ -92,14 +92,13 @@ class MapCarrierEcontCities extends Command
 
         $bar->start();
 
-        if (!empty($cities)) {
+        if (! empty($cities)) {
             CarrierCityMap::where(
                 'carrier_signature',
                 Econt::getSignature()
             )->delete();
 
             foreach ($cities as $city) {
-
                 try {
                     $validated = $this->validated($city);
 
