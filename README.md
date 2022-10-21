@@ -117,6 +117,9 @@ php artisan econt:sync-countries
 #sync cities with database (use -h to view options)
 php artisan econt:sync-cities 
 
+#create cities map with other carriers in database  (use -h to view options)
+php artisan econt:map-cities
+
 #sync offices with database (use -h to view options)
 php artisan econt:sync-offices 
 
@@ -149,6 +152,7 @@ CarrierEcontQuarter
 CarrierEcontPayment
 CarrierEcontApiStatus
 CarrierEcontTracking
+CarrierCityMap
 ```
 
 Events

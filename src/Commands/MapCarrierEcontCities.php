@@ -1,0 +1,208 @@
+<?php
+
+namespace Gdinko\Econt\Commands;
+
+use Gdinko\Econt\Exceptions\EcontImportValidationException;
+use Gdinko\Econt\Facades\Econt;
+use Gdinko\Econt\Models\CarrierCityMap;
+use Gdinko\Econt\Models\CarrierEcontCountry;
+use Gdinko\Econt\Traits\ValidatesImport;
+use Illuminate\Console\Command;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
+
+class MapCarrierEcontCities extends Command
+{
+    use ValidatesImport;
+
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'econt:map-cities
+                            {country_code}
+                            {--timeout=20 : Econt API Call timeout}';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Gets Econt cities and makes carriers city map in database';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        $this->info('-> Carrier Econt Map Cities');
+
+        try {
+            Econt::setTimeout(
+                $this->option('timeout')
+            );
+
+            $this->import();
+
+            $this->newLine(2);
+        } catch (\Exception $e) {
+            $this->newLine();
+            $this->error(
+                $e->getMessage()
+            );
+        }
+
+        return 0;
+    }
+
+    /**
+     * import
+     *
+     * @return void
+     */
+    protected function import()
+    {
+        $countryCode = $this->argument('country_code');
+
+        $country = CarrierEcontCountry::where(
+            'code2',
+            $countryCode
+        )->firstOrFail();
+
+        $cities = Econt::getCities(
+            $countryCode
+        );
+
+        $bar = $this->output->createProgressBar(
+            count($cities)
+        );
+
+        $bar->start();
+
+        if (!empty($cities)) {
+            CarrierCityMap::where(
+                'carrier_signature',
+                Econt::getSignature()
+            )->delete();
+
+            foreach ($cities as $city) {
+
+                try {
+                    $validated = $this->validated($city);
+
+                    $name = $this->normalizeCityName(
+                        $validated['name']
+                    );
+
+                    $nameSlug = $this->getSlug($name);
+
+                    $slug = $this->getSlug(
+                        $nameSlug . ' ' . $validated['postCode']
+                    );
+
+                    $data = [
+                        'carrier_signature' => Econt::getSignature(),
+                        'carrier_city_id' => $validated['id'],
+                        'country_code' => $country->code3,
+                        'region' => Str::title($validated['regionName']),
+                        'name' => $name,
+                        'name_slug' => $nameSlug,
+                        'post_code' => $validated['postCode'],
+                        'slug' => $slug,
+                        'uuid' => $this->getUuid($slug),
+                    ];
+
+                    CarrierCityMap::create(
+                        $data
+                    );
+                } catch (EcontImportValidationException $eive) {
+                    $this->newLine();
+                    $this->error(
+                        $eive->getMessage()
+                    );
+                    $this->info(
+                        print_r($eive->getData(), true)
+                    );
+                    $this->error(
+                        print_r($eive->getErrors(), true)
+                    );
+                }
+
+                $bar->advance();
+            }
+        }
+
+        $bar->finish();
+    }
+
+    /**
+     * validationRules
+     *
+     * @return array
+     */
+    protected function validationRules(): array
+    {
+        return [
+            'id' => 'integer|required',
+            'country' => 'array',
+            'country.code3' => 'string|required',
+            'postCode' => 'string|nullable',
+            'name' => 'string|required',
+            'nameEn' => 'string|nullable',
+            'regionName' => 'string|nullable',
+            'regionNameEn' => 'string|nullable',
+            'phoneCode' => 'string|required',
+        ];
+    }
+
+    /**
+     * normalizeCityName
+     *
+     * @param  string $name
+     * @return string
+     */
+    protected function normalizeCityName(string $name): string
+    {
+        return Str::title(
+            explode(',', $name)[0]
+        );
+    }
+
+    /**
+     * getSlug
+     *
+     * @param  string $string
+     * @return string
+     */
+    protected function getSlug(string $string): string
+    {
+        return Str::slug($string);
+    }
+
+    /**
+     * getUuid
+     *
+     * @param  string $string
+     * @return string
+     */
+    protected function getUuid(string $string): string
+    {
+        return Uuid::uuid5(
+            Uuid::NAMESPACE_URL,
+            $string
+        )->toString();
+    }
+}
