@@ -6,6 +6,7 @@ use Gdinko\Econt\Exceptions\EcontImportValidationException;
 use Gdinko\Econt\Facades\Econt;
 use Gdinko\Econt\Models\CarrierCityMap;
 use Gdinko\Econt\Models\CarrierEcontCountry;
+use Gdinko\Econt\Models\CarrierEcontOffice;
 use Gdinko\Econt\Traits\ValidatesImport;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -92,7 +93,7 @@ class MapCarrierEcontCities extends Command
 
         $bar->start();
 
-        if (! empty($cities)) {
+        if (!empty($cities)) {
             CarrierCityMap::where(
                 'carrier_signature',
                 Econt::getSignature()
@@ -127,6 +128,14 @@ class MapCarrierEcontCities extends Command
                     CarrierCityMap::create(
                         $data
                     );
+
+                    //set city_uuid to all offices with this econt_city_id
+                    CarrierEcontOffice::where(
+                        'econt_city_id',
+                        $validated['id']
+                    )->update([
+                        'city_uuid' => $data['uuid'],
+                    ]);
                 } catch (EcontImportValidationException $eive) {
                     $this->newLine();
                     $this->error(

@@ -102,6 +102,7 @@ class SyncCarrierEcontOffices extends Command
                     'econt_city_id' => $validated['address']['city']['id'],
                     'is_mps' => $validated['isMPS'],
                     'is_aps' => $validated['isAPS'],
+                    'is_robot' => $validated['isAPS'],
                     'name' => $validated['name'],
                     'name_en' => $validated['nameEn'],
                     'phones' => $validated['phones'],

@@ -67,6 +67,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereShipmentTypes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $city_uuid
+ * @property int|null $is_robot
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereCityUuid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereIsRobot($value)
  */
 class CarrierEcontOffice extends Model
 {
@@ -77,8 +81,10 @@ class CarrierEcontOffice extends Model
         'code',
         'country_code3',
         'econt_city_id',
+        'city_uuid',
         'is_mps',
         'is_aps',
+        'is_robot',
         'name',
         'name_en',
         'phones',
