@@ -73,9 +73,8 @@ test('Can Get City List For Bulgaria', function () {
 });
 
 test('Can Get Office List For Bulgaria', function () {
-
     Econt::setTimeout(90);
-    
+
     $result = Econt::getOffices('bgr');
 
     expect($result)

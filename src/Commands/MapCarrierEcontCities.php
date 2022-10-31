@@ -93,7 +93,7 @@ class MapCarrierEcontCities extends Command
 
         $bar->start();
 
-        if (!empty($cities)) {
+        if (! empty($cities)) {
             CarrierCityMap::where(
                 'carrier_signature',
                 Econt::getSignature()
