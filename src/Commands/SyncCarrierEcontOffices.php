@@ -170,11 +170,7 @@ class SyncCarrierEcontOffices extends Command
             'address.city.country.name' => 'sometimes|nullable',
             'address.city.country.nameEn' => 'sometimes|nullable',
             'address.city.country.isEU' => 'sometimes|nullable',
-
-
             'address.city.country.postCode' => 'sometimes|nullable',
-            'address.city.country.name' => 'sometimes|nullable',
-            'address.city.country.nameEn' => 'sometimes|nullable',
             'address.city.country.regionName' => 'sometimes|nullable',
             'address.city.country.regionNameEn' => 'sometimes|nullable',
             'address.city.country.phoneCode' => 'sometimes|nullable',
@@ -187,7 +183,6 @@ class SyncCarrierEcontOffices extends Command
             'address.city.country.friday' => 'sometimes|nullable',
             'address.city.country.saturday' => 'sometimes|nullable',
             'address.city.country.sunday' => 'sometimes|nullable',
-
             'address.fullAddress' => 'sometimes|nullable',
             'address.fullAddressEn' => 'sometimes|nullable',
             'address.quarter' => 'sometimes|nullable',
@@ -196,7 +191,6 @@ class SyncCarrierEcontOffices extends Command
             'address.other' => 'sometimes|nullable',
             'address.location' => 'sometimes|nullable|array',
             'address.zip' => 'sometimes|nullable',
-
             'info' => 'string|nullable',
             'currency' => 'string|nullable',
             'language' => 'string|nullable',
