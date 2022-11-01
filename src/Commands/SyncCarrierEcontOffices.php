@@ -136,6 +136,7 @@ class SyncCarrierEcontOffices extends Command
                     'hub_code' => $validated['hubCode'],
                     'hub_name' => $validated['hubName'],
                     'hub_name_en' => $validated['hubNameEn'],
+                    'meta' => $validated,
                 ]);
 
                 $bar->advance();
@@ -164,6 +165,38 @@ class SyncCarrierEcontOffices extends Command
             'address' => 'array|required',
             'address.city.id' => 'integer|required',
             'address.city.country.code3' => 'string|required',
+            'address.city.country.id' => 'sometimes|nullable',
+            'address.city.country.code2' => 'sometimes|nullable',
+            'address.city.country.name' => 'sometimes|nullable',
+            'address.city.country.nameEn' => 'sometimes|nullable',
+            'address.city.country.isEU' => 'sometimes|nullable',
+
+
+            'address.city.country.postCode' => 'sometimes|nullable',
+            'address.city.country.name' => 'sometimes|nullable',
+            'address.city.country.nameEn' => 'sometimes|nullable',
+            'address.city.country.regionName' => 'sometimes|nullable',
+            'address.city.country.regionNameEn' => 'sometimes|nullable',
+            'address.city.country.phoneCode' => 'sometimes|nullable',
+            'address.city.country.location' => 'sometimes|nullable',
+            'address.city.country.expressCityDeliveries' => 'sometimes|nullable',
+            'address.city.country.monday' => 'sometimes|nullable',
+            'address.city.country.tuesday' => 'sometimes|nullable',
+            'address.city.country.wednesday' => 'sometimes|nullable',
+            'address.city.country.thursday' => 'sometimes|nullable',
+            'address.city.country.friday' => 'sometimes|nullable',
+            'address.city.country.saturday' => 'sometimes|nullable',
+            'address.city.country.sunday' => 'sometimes|nullable',
+
+            'address.fullAddress' => 'sometimes|nullable',
+            'address.fullAddressEn' => 'sometimes|nullable',
+            'address.quarter' => 'sometimes|nullable',
+            'address.street' => 'sometimes|nullable',
+            'address.num' => 'sometimes|nullable',
+            'address.other' => 'sometimes|nullable',
+            'address.location' => 'sometimes|nullable|array',
+            'address.zip' => 'sometimes|nullable',
+
             'info' => 'string|nullable',
             'currency' => 'string|nullable',
             'language' => 'string|nullable',

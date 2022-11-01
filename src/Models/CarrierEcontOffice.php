@@ -71,6 +71,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $is_robot
  * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereCityUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CarrierEcontOffice whereIsRobot($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Gdinko\Econt\Models\CarrierCityMap[] $cityMap
+ * @property-read int|null $city_map_count
  */
 class CarrierEcontOffice extends Model
 {
@@ -119,6 +121,15 @@ class CarrierEcontOffice extends Model
             CarrierEcontCity::class,
             'econt_city_id',
             'econt_city_id'
+        );
+    }
+
+    public function cityMap()
+    {
+        return $this->hasMany(
+            CarrierCityMap::class,
+            'uuid',
+            'city_uuid'
         );
     }
 }
