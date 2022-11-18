@@ -18,7 +18,8 @@ class SyncCarrierEcontCities extends Command
      * @var string
      */
     protected $signature = 'econt:sync-cities
-                            {--timeout=20 : Econt API Call timeout}';
+                            {--timeout=20 : Econt API Call timeout}
+                            {--country_code=}';
 
     /**
      * The console command description.
@@ -82,13 +83,21 @@ class SyncCarrierEcontCities extends Command
      */
     protected function import()
     {
-        $cities = Econt::getCities();
+        $countryCode = $this->option('country_code');
+
+        if (empty($countryCode)) {
+            $countryCode = '';
+        }
+
+        $cities = Econt::getCities(
+            $countryCode
+        );
 
         $bar = $this->output->createProgressBar(count($cities));
 
         $bar->start();
 
-        if (! empty($cities)) {
+        if (!empty($cities)) {
             CarrierEcontCity::truncate();
 
             foreach ($cities as $city) {
