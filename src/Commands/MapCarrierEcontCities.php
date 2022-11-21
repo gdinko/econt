@@ -104,7 +104,7 @@ class MapCarrierEcontCities extends Command
                 'carrier_signature',
                 Econt::getSignature()
             )
-            ->where('country_code', $country->iso_alpha3)
+            ->where('country_code', $country->code3)
             ->delete();
 
             foreach ($cities as $city) {
