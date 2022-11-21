@@ -97,8 +97,7 @@ class SyncCarrierEcontCities extends Command
 
         $bar->start();
 
-        if (!empty($cities)) {
-
+        if (! empty($cities)) {
             if (empty($countryCode)) {
                 CarrierEcontCity::truncate();
             } else {
