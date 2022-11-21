@@ -22,7 +22,7 @@ class MapCarrierEcontCities extends Command
      * @var string
      */
     protected $signature = 'econt:map-cities
-                            {country_code}
+                            {country_code : Country ALPHA 2 ISO 3166 code}
                             {--timeout=20 : Econt API Call timeout}';
 
     /**
@@ -87,6 +87,12 @@ class MapCarrierEcontCities extends Command
             $countryCode
         );
 
+        if (! CarrierEcontOffice::where('country_code3', $country->code3)->count()) {
+            $this->newLine();
+            $this->warn('[WARN] Import econt offices first to map office city ...');
+            $this->newLine();
+        }
+
         $bar = $this->output->createProgressBar(
             count($cities)
         );
@@ -97,7 +103,9 @@ class MapCarrierEcontCities extends Command
             CarrierCityMap::where(
                 'carrier_signature',
                 Econt::getSignature()
-            )->delete();
+            )
+            ->where('country_code', $country->iso_alpha3)
+            ->delete();
 
             foreach ($cities as $city) {
                 try {

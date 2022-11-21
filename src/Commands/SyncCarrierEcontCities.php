@@ -19,7 +19,7 @@ class SyncCarrierEcontCities extends Command
      */
     protected $signature = 'econt:sync-cities
                             {--timeout=20 : Econt API Call timeout}
-                            {--country_code=}';
+                            {--country_code= : Country ALPHA 3 ISO 3166 code}';
 
     /**
      * The console command description.
@@ -97,8 +97,16 @@ class SyncCarrierEcontCities extends Command
 
         $bar->start();
 
-        if (! empty($cities)) {
-            CarrierEcontCity::truncate();
+        if (!empty($cities)) {
+
+            if (empty($countryCode)) {
+                CarrierEcontCity::truncate();
+            } else {
+                CarrierEcontCity::where(
+                    'country_code3',
+                    $countryCode
+                )->delete();
+            }
 
             foreach ($cities as $city) {
                 $validated = $this->validated($city);

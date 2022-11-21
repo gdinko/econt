@@ -19,7 +19,8 @@ class SyncCarrierEcontOffices extends Command
      * @var string
      */
     protected $signature = 'econt:sync-offices
-                            {--timeout=20 : Econt API Call timeout}';
+                            {--timeout=20 : Econt API Call timeout}
+                            {--country_code= : Country ALPHA 3 ISO 3166 code}';
 
     /**
      * The console command description.
@@ -83,14 +84,31 @@ class SyncCarrierEcontOffices extends Command
      */
     protected function import()
     {
-        $offices = Econt::getOffices();
+        $countryCode = $this->option('country_code');
+
+        if (empty($countryCode)) {
+            $countryCode = '';
+        }
+
+        $offices = Econt::getOffices(
+            $countryCode
+        );
 
         $bar = $this->output->createProgressBar(count($offices));
 
         $bar->start();
 
-        if (! empty($offices)) {
-            CarrierEcontOffice::truncate();
+        if (!empty($offices)) {
+            // CarrierEcontOffice::truncate();
+
+            if (empty($countryCode)) {
+                CarrierEcontOffice::truncate();
+            } else {
+                CarrierEcontOffice::where(
+                    'country_code3',
+                    $countryCode
+                )->delete();
+            }
 
             foreach ($offices as $office) {
                 $validated = $this->validated($office);
