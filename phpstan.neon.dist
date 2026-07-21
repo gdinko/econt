@@ -10,4 +10,7 @@ parameters:
     tmpDir: build/phpstan
     checkOctaneCompatibility: false
     checkModelProperties: true
-    checkMissingIterableValueType: false
+    ignoreErrors:
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: config/econt.php

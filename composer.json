@@ -18,20 +18,20 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0|^8.1|^8.2|^8.3",
+        "php": "^8.2|^8.3|^8.4",
         "guzzlehttp/guzzle": "^7.4",
-        "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0"
+        "illuminate/support": "^11.0|^12.0|^13.0"
     },
     "require-dev": {
-        "nunomaduro/collision": "^5.11",
-        "nunomaduro/larastan": "^1.0",
-        "orchestra/testbench": "^6.0",
-        "pestphp/pest": "^1.21",
-        "pestphp/pest-plugin-laravel": "^1.2",
+        "nunomaduro/collision": "^8.0",
+        "nunomaduro/larastan": "^2.0|^3.0",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^2.0|^3.0|^4.0",
+        "pestphp/pest-plugin-laravel": "^2.0|^3.0|^4.0",
         "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.1",
-        "phpunit/phpunit": "^9.0"
+        "phpstan/phpstan-deprecation-rules": "^1.0|^2.0",
+        "phpstan/phpstan-phpunit": "^1.1|^2.0",
+        "phpunit/phpunit": "^10.0|^11.0|^12.0"
     },
     "autoload": {
         "psr-4": {

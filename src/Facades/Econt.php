@@ -5,7 +5,7 @@ namespace Gdinko\Econt\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Gdinko\Econt\Skeleton\SkeletonClass
+ * @mixin \Gdinko\Econt\Econt
  */
 class Econt extends Facade
 {

@@ -39,7 +39,7 @@ trait ManagesNomenclatures
      * @param  int $cityID
      * @return array
      */
-    public function getOffices(string $countryCode = '', int $cityID = null): array
+    public function getOffices(string $countryCode = '', ?int $cityID = null): array
     {
         return $this->post(
             'Nomenclatures/NomenclaturesService.getOffices.json',
@@ -56,7 +56,7 @@ trait ManagesNomenclatures
      * @param  int $cityID
      * @return array
      */
-    public function getStreets(int $cityID = null): array
+    public function getStreets(?int $cityID = null): array
     {
         return $this->post(
             'Nomenclatures/NomenclaturesService.getStreets.json',
@@ -70,7 +70,7 @@ trait ManagesNomenclatures
      * @param  int $cityID
      * @return array
      */
-    public function getQuarters(int $cityID = null): array
+    public function getQuarters(?int $cityID = null): array
     {
         return $this->post(
             'Nomenclatures/NomenclaturesService.getQuarters.json',
